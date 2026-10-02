@@ -1,0 +1,17 @@
+Built-in SoundFont: YDP Grand Piano SF2 (2016-08-04)
+
+SoundFont assembly and sample editing: Roberto, FreePats project.
+Recorded source: Yamaha Disklavier Pro piano multisamples from Zenph Studios;
+the source performances were recorded for OLPC by Dr. Mikhail Krishtal and team.
+
+License: Creative Commons Attribution 3.0 (CC BY 3.0)
+https://creativecommons.org/licenses/by/3.0/
+
+Original source and attribution details:
+https://freepats.zenvoid.org/Piano/acoustic-grand-piano.html
+
+The included SF2 sample data is unchanged from the upstream YDP Grand Piano
+SoundFont. Only its filename was changed to ConcertGrand.sf2 so Keyflow can
+load it as its bundled piano. Keyflow adds optional real-time hall reverb while
+playing; the SoundFont itself is not modified. Yamaha, Zenph Studios, and OLPC
+are not affiliated with or endorsing Keyflow.
