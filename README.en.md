@@ -1,24 +1,21 @@
 # Keyflow · Piano Performance & Concert VFX Studio
 
-> **This is the release repository, not the source repository.** It carries only Keyflow's built
-> packages and its user documentation; the source lives in a private repository. Everything here
-> is produced by the source repository's release pipeline at exactly tag `v1.0.0` — see
-> **[Downloading a release](#downloading-a-release)** below, **[Releases](https://github.com/lxmtuu/PianoPath-Releases/releases/latest)** for the
-> newest one, and **[Issues](https://github.com/lxmtuu/PianoPath-Releases/issues)** to report a defect.
->
-> *Do not edit files in this repository by hand*: the branch is rebuilt from the source repository
-> on every release, so hand edits are overwritten.
+## ⬇️ Download Keyflow for Windows
 
-> Bản tiếng Việt: [README.md](README.md) · Both language editions are generated from one
-> source, and every screenshot below is rendered by the application itself, so the two files always
-> show the same build.
+### [**DOWNLOAD `Keyflow-Setup-1.0.0.exe`**](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0/Keyflow-Setup-1.0.0.exe)
+
+**Recommended · Windows 10/11 64-bit · 83.2 MiB · no .NET installation required.** The link above
+starts the `.exe` installer download directly; open it and follow the wizard. See the
+[portable ZIP builds](#downloading-a-release),
+[`SHA256SUMS.txt`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0/SHA256SUMS.txt), or the
+[v1.0.0 release page](https://github.com/lxmtuu/KeyFlow/releases/tag/v1.0.0) for other options.
+
+> **This is the official release repository, not the source repository.** Installable packages live
+> in [GitHub Releases](https://github.com/lxmtuu/KeyFlow/releases); this repository contains the user
+> documentation and interface pictures for exactly `v1.0.0`. The source is managed privately.
 >
-> **Changelog: [CHANGELOG.en.md](CHANGELOG.en.md)** (bản tiếng Việt: [CHANGELOG.md](CHANGELOG.md))
-> — everything a user can see, recorded per released version.
->
-> **Download a build: [the public release repository](https://github.com/lxmtuu/PianoPath-Releases/releases)** — the portable ZIP and the `.exe`
-> installer. The repository you are reading is the **private source repository**: the source lives here, while
-> the packages and the product page live in that other one.
+> **Tiếng Việt: [README.md](README.md)** · **Changelog: [CHANGELOG.en.md](CHANGELOG.en.md)**
+> (Vietnamese: [CHANGELOG.md](CHANGELOG.md)) · **[Report an issue](https://github.com/lxmtuu/KeyFlow/issues)**
 
 Keyflow is a Windows desktop application (C# · WPF · .NET 10) for **playing, practising and making
 piano videos from MIDI** at concert-production quality. The interface ships **two languages — English
@@ -60,15 +57,18 @@ else's artwork.*
 
 ## Downloading a release
 
-Every release (`v1.0.0` and later) is a GitHub **Release** holding four packages and a
-`SHA256SUMS.txt` covering all of them: **[https://github.com/lxmtuu/PianoPath-Releases/releases/latest](https://github.com/lxmtuu/PianoPath-Releases/releases/latest)**.
+Release `v1.0.0` contains four packages in **[GitHub Releases](https://github.com/lxmtuu/KeyFlow/releases/tag/v1.0.0)**.
+Each file name below is a direct download link; the `.exe` installer is recommended for most Windows
+computers. Check the **[latest release](https://github.com/lxmtuu/KeyFlow/releases/latest)** when a newer
+version becomes available.
 
-| File | What it is | What the target PC needs |
+| Download | What it is | What the target PC needs |
 | --- | --- | --- |
-| `Keyflow-1.0.0-win-x64.zip` | Portable **self-contained** build: unzip and run `PianoPath.exe` | Nothing else |
-| `Keyflow-Setup-1.0.0.exe` | **Installer** for Windows x64: Start Menu/Desktop shortcuts, an uninstall entry, an English/Vietnamese wizard | Nothing else |
-| `Keyflow-1.0.0-win-x64-fd.zip` | **Framework-dependent** build, far smaller | [.NET 10 Desktop Runtime (x64)](https://dotnet.microsoft.com/download/dotnet/10.0) |
-| `Keyflow-1.0.0-win-arm64.zip` | Windows on ARM, self-contained (published by CI; no ARM machine has run it yet) | Nothing else |
+| [**⬇️ `Keyflow-Setup-1.0.0.exe`**](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0/Keyflow-Setup-1.0.0.exe) **(recommended)** | Windows x64 installer: Start Menu/Desktop shortcuts, an uninstall entry, an English/Vietnamese wizard | Nothing else |
+| [⬇️ `Keyflow-1.0.0-win-x64.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0/Keyflow-1.0.0-win-x64.zip) | Portable **self-contained** build: unzip and run `PianoPath.exe` | Nothing else |
+| [⬇️ `Keyflow-1.0.0-win-x64-fd.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0/Keyflow-1.0.0-win-x64-fd.zip) | **Framework-dependent** build, far smaller | [.NET 10 Desktop Runtime (x64)](https://dotnet.microsoft.com/download/dotnet/10.0) |
+| [⬇️ `Keyflow-1.0.0-win-arm64.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0/Keyflow-1.0.0-win-arm64.zip) | Windows on ARM, self-contained (published by CI; no ARM machine has run it yet) | Nothing else |
+| [🔐 `SHA256SUMS.txt`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0/SHA256SUMS.txt) | SHA-256 checksums for every download | PowerShell `Get-FileHash` |
 
 Run the installer and you are done; for a ZIP, **unzip the whole folder and run `PianoPath.exe`** — never
 separate the `.exe` from its folder:

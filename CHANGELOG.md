@@ -15,7 +15,7 @@ dụng tự đọc nó qua `AppInfo.Version` (nhãn phiên bản của menu kh�
 một số: quên một bản sao là kiểm tra tĩnh đỏ, không phải một bản phát hành nói hai số phiên bản.
 
 Giới hạn kỹ thuật của sản phẩm nằm ở mục *[Giới hạn hiện tại](README.md#giới-hạn-hiện-tại)* của README và
-không được lặp lại ở đây; việc còn mở nằm ở [`docs/ROADMAP.md`](docs/ROADMAP.md).
+không được lặp lại ở đây. `docs/ROADMAP.md` thuộc kho mã nguồn riêng nên không được xuất bản trong kho phát hành này.
 
 ## 1.0.0 — 2026-10-02
 

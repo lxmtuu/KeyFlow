@@ -16,7 +16,8 @@ of these files) are pinned to the same number by `scan_release_version`: forgett
 check red instead of shipping a release that states two versions.
 
 The product's technical limits live in the README's *[Current limitations](README.en.md#current-limitations)*
-section and are not repeated here; the open work lives in [`docs/ROADMAP.md`](docs/ROADMAP.md).
+section and are not repeated here. `docs/ROADMAP.md` belongs to the private source repository and is not
+published in this release repository.
 
 ## 1.0.0 — 2026-10-02
 
