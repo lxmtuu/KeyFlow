@@ -1,24 +1,26 @@
 # Keyflow · Piano Performance & Concert VFX Studio
 
-> **Đây là kho phát hành, không phải kho mã nguồn.** Kho này chỉ chứa bản dựng và tài liệu
-> người dùng của Keyflow; mã nguồn nằm ở một kho riêng và không được công khai. Mọi tệp ở đây
-> do quy trình phát hành của kho nguồn sinh ra tại đúng tag `v1.0.0` — xem
-> **[Tải bản phát hành](#tải-bản-phát-hành)** bên dưới, hoặc
-> **[Releases](https://github.com/lxmtuu/PianoPath-Releases/releases/latest)** cho bản mới nhất, và **[Issues](https://github.com/lxmtuu/PianoPath-Releases/issues)** để báo lỗi.
->
-> *Đừng sửa tệp trong kho này bằng tay*: mỗi lần phát hành, nhánh này được dựng lại từ kho
-> nguồn nên mọi thay đổi viết tay sẽ bị ghi đè.
+## ⬇️ Tải Keyflow cho Windows
 
-> **English version: [README.en.md](README.en.md)** · Bản dưới đây là bản gốc tiếng Việt. Hai tệp là
-> cùng một tài liệu và cùng ảnh (do CI render); cả hai được sinh từ một bản gốc nên
-> không bản nào lệch khỏi bản kia.
+### [**TẢI TRỰC TIẾP `Keyflow-Setup-1.0.0.exe` (Bộ cài Windows x64 · 83,3 MiB)**](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-Setup-1.0.0.exe)
+
+**Bản khuyên dùng · Windows 10/11 64-bit · không cần cài .NET.** Bấm liên kết trên để tải thẳng bộ cài
+`.exe`, mở tệp và làm theo trình cài đặt (Anh/Việt). Nếu cần bản giải nén chạy ngay, xem bảng
+**[Tải bản phát hành](#tải-bản-phát-hành)** bên dưới, tệp kiểm tra
+[`SHA256SUMS.txt`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/SHA256SUMS.txt) hoặc
+**[trang phát hành v1.0.0](https://github.com/lxmtuu/KeyFlow/releases/tag/v1.0.0-final)**.
+
+> **⬇️ Tải nhanh bộ cài `.exe`:** **[`Keyflow-Setup-1.0.0.exe` (tải trực tiếp)](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-Setup-1.0.0.exe)**
+> · Bản ZIP portable x64: [`Keyflow-1.0.0-win-x64.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-1.0.0-win-x64.zip)
+> · Tất cả các gói: **[Releases](https://github.com/lxmtuu/KeyFlow/releases/latest)**
 >
-> **Nhật ký thay đổi: [CHANGELOG.md](CHANGELOG.md)** (bản tiếng Anh: [CHANGELOG.en.md](CHANGELOG.en.md))
-> — mọi thay đổi người dùng nhìn thấy, ghi theo từng phiên bản phát hành.
+> **Đây là kho phát hành chính thức, không phải kho mã nguồn.** Kho này chứa các gói cài đặt và tài liệu
+> người dùng của Keyflow tại mốc `v1.0.0`; mã nguồn được quản lý ở kho riêng. Xem
+> **[Tải bản phát hành](#tải-bản-phát-hành)** bên dưới để chọn gói phù hợp, và mở
+> **[Issues](https://github.com/lxmtuu/KeyFlow/issues)** để báo lỗi.
 >
-> **Tải bản dựng: [kho phát hành công khai](https://github.com/lxmtuu/PianoPath-Releases/releases)** — ZIP portable và bộ cài `.exe`.
-> Kho bạn đang đọc là **kho mã nguồn riêng tư**: đây là nơi giữ mã nguồn, còn gói phát hành và
-> trang sản phẩm chỉ nằm ở kho kia.
+> **English version: [README.en.md](README.en.md)** · **Nhật ký thay đổi: [CHANGELOG.md](CHANGELOG.md)**
+> (bản tiếng Anh: [CHANGELOG.en.md](CHANGELOG.en.md)) · **[Bản thuyết trình (PDF/DOCX)](docs/presentation/README.md)**
 
 Keyflow là ứng dụng desktop Windows (C# · WPF · .NET 10) để **chơi đàn, luyện tập và làm video piano theo MIDI** với chất lượng trình diễn hoà nhạc. Giao diện có **hai ngôn ngữ — English và Tiếng Việt** — đổi ngay trong ứng dụng, không cần khởi động lại (xem [Đa ngôn ngữ](#đa-ngôn-ngữ)). Sân khấu mặc định là một hội trường tối: nốt rơi theo thời gian, bàn phím 88 phím đổ bóng bằng shader mô phỏng mô hình Unreal (GGX + softbox + ACES), tia lửa nóng sáng nguội dần theo bức xạ nhiệt, sóng cộng hưởng âm học, lửa tại điểm phím gõ và các lớp không khí (bụi acoustic, cánh hoa, đèn sân khấu) có thể bật riêng. Sân khấu ấy do một **engine GPU Direct3D 11** vẽ trên luồng riêng — HDR 16-bit, bloom nhiều tầng, tới 240 FPS và không bao giờ làm chậm đầu vào MIDI; bộ dựng hình WPF chỉ còn là đường dự phòng khi Direct3D không khởi động được (xem [Sân khấu & hiệu ứng hình ảnh](#sân-khấu--hiệu-ứng-hình-ảnh)).
 
@@ -47,15 +49,16 @@ Keyflow là ứng dụng desktop Windows (C# · WPF · .NET 10) để **chơi đ
 
 ## Tải bản phát hành
 
-Mỗi mốc phát hành (`v1.0.0` và các bản sau) là một mục trong **[Releases](https://github.com/lxmtuu/PianoPath-Releases/releases)**, kèm
-`SHA256SUMS.txt` của mọi tệp đính kèm. Bản mới nhất: **[https://github.com/lxmtuu/PianoPath-Releases/releases/latest](https://github.com/lxmtuu/PianoPath-Releases/releases/latest)**.
+Bản `v1.0.0` đã được phát hành tại **[GitHub Releases](https://github.com/lxmtuu/KeyFlow/releases/tag/v1.0.0-final)**, kèm
+[`SHA256SUMS.txt`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/SHA256SUMS.txt) cho mọi tệp đính kèm. Bấm trực tiếp vào tên tệp trong bảng dưới đây để tải về ngay (bộ cài `.exe` ở dòng đầu tiên là lựa chọn khuyên dùng cho phần lớn máy Windows). Bản mới nhất luôn ở **[https://github.com/lxmtuu/KeyFlow/releases/latest](https://github.com/lxmtuu/KeyFlow/releases/latest)**.
 
-| Tệp | Là gì | Máy đích cần gì |
+| Tải trực tiếp | Là gì | Máy đích cần gì |
 | --- | --- | --- |
-| `Keyflow-1.0.0-win-x64.zip` | Bản portable **self-contained**: giải nén là chạy `PianoPath.exe` | Không cần cài gì thêm |
-| `Keyflow-Setup-1.0.0.exe` | **Bộ cài** cho Windows x64: shortcut Start Menu/Desktop, mục gỡ cài đặt, wizard Anh/Việt | Không cần cài gì thêm |
-| `Keyflow-1.0.0-win-x64-fd.zip` | Bản **framework-dependent**, nhẹ hơn nhiều | [.NET 10 Desktop Runtime (x64)](https://dotnet.microsoft.com/download/dotnet/10.0) |
-| `Keyflow-1.0.0-win-arm64.zip` | Windows on ARM, self-contained (CI publish; chưa máy ARM nào chạy thử) | Không cần cài gì thêm |
+| [**⬇️ `Keyflow-Setup-1.0.0.exe`**](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-Setup-1.0.0.exe) **(khuyên dùng)** | **Bộ cài** cho Windows x64 (83,3 MiB): tạo shortcut Start Menu/Desktop, mục gỡ cài đặt, wizard Anh/Việt | Không cần cài gì thêm |
+| [⬇️ `Keyflow-1.0.0-win-x64.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-1.0.0-win-x64.zip) | Bản portable **self-contained** (117,3 MiB): giải nén là chạy `PianoPath.exe` | Không cần cài gì thêm |
+| [⬇️ `Keyflow-1.0.0-win-x64-fd.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-1.0.0-win-x64-fd.zip) | Bản **framework-dependent** (54,9 MiB), nhẹ hơn nhiều | [.NET 10 Desktop Runtime (x64)](https://dotnet.microsoft.com/download/dotnet/10.0) |
+| [⬇️ `Keyflow-1.0.0-win-arm64.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-1.0.0-win-arm64.zip) | Windows on ARM, self-contained (105,2 MiB; CI publish, chưa máy ARM nào chạy thử) | Không cần cài gì thêm |
+| [🔐 `SHA256SUMS.txt`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/SHA256SUMS.txt) | Bảng băm SHA-256 của cả 4 gói phát hành | PowerShell `Get-FileHash` |
 
 Cài bằng bộ cài thì xong; dùng bản ZIP thì **giải nén cả thư mục rồi chạy `PianoPath.exe`** — đừng
 tách `.exe` ra khỏi thư mục của nó:

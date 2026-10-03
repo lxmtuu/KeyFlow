@@ -34,6 +34,7 @@ dựng từ đúng nội dung tài liệu phát hành ([README.md](../../README.
 
 ## Ghi chú
 
+- **Tải trực tiếp bộ cài Windows (`.exe`)**: [**⬇️ `Keyflow-Setup-1.0.0.exe`**](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-Setup-1.0.0.exe) (83,3 MiB · Windows 10/11 64-bit, không cần cài thêm .NET) — hoặc xem toàn bộ các gói tại [GitHub Releases](https://github.com/lxmtuu/KeyFlow/releases/tag/v1.0.0-final).
 - Ảnh chụp trong các slide lấy từ [`docs/previews/vi/`](../previews/vi) — do chính
   ứng dụng render trong CI (`--snapshot`), không phải ảnh dàn dựng.
 - Mọi số liệu và phát biểu trong slide bám sát tài liệu phát hành v1.0.0; khi có

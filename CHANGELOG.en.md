@@ -1,5 +1,9 @@
 # Changelog · Keyflow
 
+> **⬇️ Direct Windows installer (`.exe`) download:** **[`Keyflow-Setup-1.0.0.exe` (83.3 MiB)](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-Setup-1.0.0.exe)**
+> · Portable ZIP (x64): [`Keyflow-1.0.0-win-x64.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-1.0.0-win-x64.zip)
+> · All packages: **[GitHub Releases](https://github.com/lxmtuu/KeyFlow/releases/latest)**
+>
 > **Bản tiếng Việt: [CHANGELOG.md](CHANGELOG.md)** · This is the English edition of the same document. The
 > two files carry the same content and **the same list of versions**; `tools/check_sources.py`
 > (`scan_release_version`) compares that list in both against `<Version>` in `PianoPath.csproj`, so neither
@@ -16,9 +20,12 @@ of these files) are pinned to the same number by `scan_release_version`: forgett
 check red instead of shipping a release that states two versions.
 
 The product's technical limits live in the README's *[Current limitations](README.en.md#current-limitations)*
-section and are not repeated here; the open work lives in [`docs/ROADMAP.md`](docs/ROADMAP.md).
+section and are not repeated here. `docs/ROADMAP.md` belongs to the private source repository and is not
+published in this release repository.
 
 ## 1.0.0 — 2026-10-02
+
+> **⬇️ Download Keyflow 1.0.0 for Windows:** **[`Keyflow-Setup-1.0.0.exe` (Windows x64 Installer · recommended)](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-Setup-1.0.0.exe)** · [`Keyflow-1.0.0-win-x64.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-1.0.0-win-x64.zip) · [`Keyflow-1.0.0-win-x64-fd.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-1.0.0-win-x64-fd.zip) · [`Keyflow-1.0.0-win-arm64.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-1.0.0-win-arm64.zip) · [`SHA256SUMS.txt`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/SHA256SUMS.txt)
 
 The first official release. Keyflow is a Windows desktop application (C# · WPF · .NET 10) to **play, practise
 and make piano videos from MIDI** at concert-performance quality, with an interface in **English and Tiếng
