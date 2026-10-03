@@ -1,5 +1,9 @@
 # Nhật ký thay đổi · Keyflow
 
+> **⬇️ Tải trực tiếp bộ cài Windows (`.exe`):** **[`Keyflow-Setup-1.0.0.exe` (83,3 MiB)](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-Setup-1.0.0.exe)**
+> · ZIP portable x64: [`Keyflow-1.0.0-win-x64.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-1.0.0-win-x64.zip)
+> · Tất cả các gói: **[GitHub Releases](https://github.com/lxmtuu/KeyFlow/releases/latest)**
+>
 > **English version: [CHANGELOG.en.md](CHANGELOG.en.md)** · Bản dưới đây là bản gốc tiếng Việt. Hai tệp ghi
 > cùng một nội dung và **cùng một danh sách phiên bản**; `tools/check_sources.py` (`scan_release_version`)
 > đối chiếu danh sách đó của cả hai với `<Version>` trong `PianoPath.csproj`, nên không bản nào lệch khỏi
@@ -15,9 +19,11 @@ dụng tự đọc nó qua `AppInfo.Version` (nhãn phiên bản của menu kh�
 một số: quên một bản sao là kiểm tra tĩnh đỏ, không phải một bản phát hành nói hai số phiên bản.
 
 Giới hạn kỹ thuật của sản phẩm nằm ở mục *[Giới hạn hiện tại](README.md#giới-hạn-hiện-tại)* của README và
-không được lặp lại ở đây; việc còn mở nằm ở [`docs/ROADMAP.md`](docs/ROADMAP.md).
+không được lặp lại ở đây. `docs/ROADMAP.md` thuộc kho mã nguồn riêng nên không được xuất bản trong kho phát hành này.
 
 ## 1.0.0 — 2026-10-02
+
+> **⬇️ Tải Keyflow 1.0.0 cho Windows:** **[`Keyflow-Setup-1.0.0.exe` (Bộ cài Windows x64 · khuyên dùng)](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-Setup-1.0.0.exe)** · [`Keyflow-1.0.0-win-x64.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-1.0.0-win-x64.zip) · [`Keyflow-1.0.0-win-x64-fd.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-1.0.0-win-x64-fd.zip) · [`Keyflow-1.0.0-win-arm64.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-1.0.0-win-arm64.zip) · [`SHA256SUMS.txt`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/SHA256SUMS.txt)
 
 Bản phát hành chính thức đầu tiên. Keyflow là ứng dụng desktop Windows (C# · WPF · .NET 10) để **chơi đàn,
 luyện tập và làm video piano theo MIDI** với chất lượng trình diễn hoà nhạc, giao diện **hai ngôn ngữ
