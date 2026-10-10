@@ -1,7 +1,7 @@
 # Nhật ký thay đổi · Keyflow
 
-> **⬇️ Tải trực tiếp bộ cài Windows (`.exe`):** **[`Keyflow-Setup-1.0.0.exe` (83,3 MiB)](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-Setup-1.0.0.exe)**
-> · ZIP portable x64: [`Keyflow-1.0.0-win-x64.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-1.0.0-win-x64.zip)
+> **⬇️ Tải trực tiếp bộ cài Windows (`.exe`):** **[`Keyflow-Setup-2.0.0.exe` (48,6 MiB)](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/Keyflow-Setup-2.0.0.exe)**
+> · ZIP portable x64: [`Keyflow-2.0.0-win-x64.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/Keyflow-2.0.0-win-x64.zip)
 > · Tất cả các gói: **[GitHub Releases](https://github.com/lxmtuu/KeyFlow/releases/latest)**
 >
 > **English version: [CHANGELOG.en.md](CHANGELOG.en.md)** · Bản dưới đây là bản gốc tiếng Việt. Hai tệp ghi
@@ -20,6 +20,14 @@ một số: quên một bản sao là kiểm tra tĩnh đỏ, không phải mộ
 
 Giới hạn kỹ thuật của sản phẩm nằm ở mục *[Giới hạn hiện tại](README.md#giới-hạn-hiện-tại)* của README và
 không được lặp lại ở đây. `docs/ROADMAP.md` thuộc kho mã nguồn riêng nên không được xuất bản trong kho phát hành này.
+
+## 2.0.0 — 2026-10-10
+
+> **⬇️ Tải Keyflow 2.0.0 cho Windows:** **[`Keyflow-Setup-2.0.0.exe` (Bộ cài Windows x64 · khuyên dùng · 48,6 MiB)](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/Keyflow-Setup-2.0.0.exe)** · [`Keyflow-2.0.0-win-x64.zip` (66,4 MiB)](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/Keyflow-2.0.0-win-x64.zip) · [`Keyflow-2.0.0-win-x64-fd.zip` (2,6 MiB)](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/Keyflow-2.0.0-win-x64-fd.zip) · [`Keyflow-2.0.0-win-arm64.zip` (53,0 MiB)](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/Keyflow-2.0.0-win-arm64.zip) · [`SHA256SUMS.txt`](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/SHA256SUMS.txt)
+
+Bản Keyflow 2.0.0 được phát hành ngày 10-10-2026. GitHub Releases cung cấp bộ cài Windows x64, hai bản ZIP x64 (self-contained và framework-dependent), bản ZIP self-contained cho Windows ARM64 cùng bảng SHA-256 để kiểm tra cả bốn gói. Bản framework-dependent cần [.NET 10 Desktop Runtime (x64)](https://dotnet.microsoft.com/download/dotnet/10.0).
+
+Kho phát hành công khai này chỉ lưu gói cài đặt và tài liệu; phần so sánh giữa tag `v1.0.0-final` và `v2.0.0` không có mã nguồn ứng dụng, còn ghi chú GitHub của 2.0.0 chưa liệt kê thay đổi tính năng. Vì vậy mục này chỉ ghi các thông tin phát hành và gói tải xuống đã xác minh, không suy đoán thay đổi sản phẩm. Mục 1.0.0 bên dưới được giữ nguyên như ghi chú lịch sử, không phải danh sách thay đổi của 2.0.0.
 
 ## 1.0.0 — 2026-10-02
 

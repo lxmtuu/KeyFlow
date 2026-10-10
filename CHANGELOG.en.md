@@ -1,7 +1,7 @@
 # Changelog · Keyflow
 
-> **⬇️ Direct Windows installer (`.exe`) download:** **[`Keyflow-Setup-1.0.0.exe` (83.3 MiB)](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-Setup-1.0.0.exe)**
-> · Portable ZIP (x64): [`Keyflow-1.0.0-win-x64.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-1.0.0-win-x64.zip)
+> **⬇️ Direct Windows installer (`.exe`) download:** **[`Keyflow-Setup-2.0.0.exe` (48.6 MiB)](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/Keyflow-Setup-2.0.0.exe)**
+> · Portable ZIP (x64): [`Keyflow-2.0.0-win-x64.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/Keyflow-2.0.0-win-x64.zip)
 > · All packages: **[GitHub Releases](https://github.com/lxmtuu/KeyFlow/releases/latest)**
 >
 > **Bản tiếng Việt: [CHANGELOG.md](CHANGELOG.md)** · This is the English edition of the same document. The
@@ -22,6 +22,14 @@ check red instead of shipping a release that states two versions.
 The product's technical limits live in the README's *[Current limitations](README.en.md#current-limitations)*
 section and are not repeated here. `docs/ROADMAP.md` belongs to the private source repository and is not
 published in this release repository.
+
+## 2.0.0 — 2026-10-10
+
+> **⬇️ Download Keyflow 2.0.0 for Windows:** **[`Keyflow-Setup-2.0.0.exe` (Windows x64 installer · recommended · 48.6 MiB)](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/Keyflow-Setup-2.0.0.exe)** · [`Keyflow-2.0.0-win-x64.zip` (66.4 MiB)](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/Keyflow-2.0.0-win-x64.zip) · [`Keyflow-2.0.0-win-x64-fd.zip` (2.6 MiB)](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/Keyflow-2.0.0-win-x64-fd.zip) · [`Keyflow-2.0.0-win-arm64.zip` (53.0 MiB)](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/Keyflow-2.0.0-win-arm64.zip) · [`SHA256SUMS.txt`](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/SHA256SUMS.txt)
+
+Keyflow 2.0.0 was published on 2026-10-10. GitHub Releases provides a Windows x64 installer, two x64 ZIPs (self-contained and framework-dependent), a self-contained Windows ARM64 ZIP, and SHA-256 checksums for all four packages. The framework-dependent package requires the [.NET 10 Desktop Runtime (x64)](https://dotnet.microsoft.com/download/dotnet/10.0).
+
+This public release repository contains packages and documentation, not the application source. The comparison between tags `v1.0.0-final` and `v2.0.0` contains no application source, and the GitHub release body does not list feature changes. This entry therefore records only verified release and download information rather than guessing at product changes. The 1.0.0 entry below is retained as historical release notes, not as a list of 2.0.0 changes.
 
 ## 1.0.0 — 2026-10-02
 
