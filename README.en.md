@@ -2,20 +2,20 @@
 
 ## ⬇️ Download Keyflow for Windows
 
-### [**DIRECT DOWNLOAD `Keyflow-Setup-1.0.0.exe` (Windows x64 Installer · 83.3 MiB)**](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-Setup-1.0.0.exe)
+### [**DIRECT DOWNLOAD `Keyflow-Setup-2.0.0.exe` (Windows x64 Installer · 48.6 MiB)**](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/Keyflow-Setup-2.0.0.exe)
 
 **Recommended · Windows 10/11 64-bit · no .NET installation required.** Click the link above to download
 the `.exe` installer directly, open it and follow the wizard (English/Vietnamese). If you prefer a portable
 build, see **[Downloading a release](#downloading-a-release)** below, the
-[`SHA256SUMS.txt`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/SHA256SUMS.txt) checksums, or the
-**[v1.0.0 release page](https://github.com/lxmtuu/KeyFlow/releases/tag/v1.0.0-final)**.
+[`SHA256SUMS.txt`](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/SHA256SUMS.txt) checksums, or the
+**[v2.0.0 release page](https://github.com/lxmtuu/KeyFlow/releases/tag/v2.0.0)**.
 
-> **⬇️ Quick `.exe` installer download:** **[`Keyflow-Setup-1.0.0.exe` (direct link)](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-Setup-1.0.0.exe)**
-> · Portable ZIP (x64): [`Keyflow-1.0.0-win-x64.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-1.0.0-win-x64.zip)
+> **⬇️ Quick `.exe` installer download:** **[`Keyflow-Setup-2.0.0.exe` (direct link)](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/Keyflow-Setup-2.0.0.exe)**
+> · Portable ZIP (x64): [`Keyflow-2.0.0-win-x64.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/Keyflow-2.0.0-win-x64.zip)
 > · All packages: **[Releases](https://github.com/lxmtuu/KeyFlow/releases/latest)**
 >
 > **This is the official release repository, not the source repository.** It carries Keyflow's built
-> packages and user documentation for `v1.0.0`; the source lives in a private repository. See
+> packages and user documentation for `v2.0.0`; the source lives in a private repository. See
 > **[Downloading a release](#downloading-a-release)** below for every build option, and open
 > **[Issues](https://github.com/lxmtuu/KeyFlow/issues)** to report a defect.
 >
@@ -62,22 +62,22 @@ else's artwork.*
 
 ## Downloading a release
 
-Release `v1.0.0` is published in **[GitHub Releases](https://github.com/lxmtuu/KeyFlow/releases/tag/v1.0.0-final)** along with
-[`SHA256SUMS.txt`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/SHA256SUMS.txt) covering every attachment. Click any file name in the table below to download it directly (the `.exe` installer on the first row is recommended for most Windows PCs). The newest release is always at **[https://github.com/lxmtuu/KeyFlow/releases/latest](https://github.com/lxmtuu/KeyFlow/releases/latest)**.
+Release `v2.0.0` is published in **[GitHub Releases](https://github.com/lxmtuu/KeyFlow/releases/tag/v2.0.0)** along with
+[`SHA256SUMS.txt`](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/SHA256SUMS.txt) covering every attachment. Click any file name in the table below to download it directly (the `.exe` installer on the first row is recommended for most Windows PCs). The newest release is always at **[https://github.com/lxmtuu/KeyFlow/releases/latest](https://github.com/lxmtuu/KeyFlow/releases/latest)**.
 
 | Direct download | What it is | What the target PC needs |
 | --- | --- | --- |
-| [**⬇️ `Keyflow-Setup-1.0.0.exe`**](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-Setup-1.0.0.exe) **(recommended)** | **Installer** for Windows x64 (83.3 MiB): Start Menu/Desktop shortcuts, an uninstall entry, an English/Vietnamese wizard | Nothing else |
-| [⬇️ `Keyflow-1.0.0-win-x64.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-1.0.0-win-x64.zip) | Portable **self-contained** build (117.3 MiB): unzip and run `PianoPath.exe` | Nothing else |
-| [⬇️ `Keyflow-1.0.0-win-x64-fd.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-1.0.0-win-x64-fd.zip) | **Framework-dependent** build (54.9 MiB), far smaller | [.NET 10 Desktop Runtime (x64)](https://dotnet.microsoft.com/download/dotnet/10.0) |
-| [⬇️ `Keyflow-1.0.0-win-arm64.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-1.0.0-win-arm64.zip) | Windows on ARM, self-contained (105.2 MiB; published by CI, no ARM machine has run it yet) | Nothing else |
-| [🔐 `SHA256SUMS.txt`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/SHA256SUMS.txt) | SHA-256 checksums for all 4 release packages | PowerShell `Get-FileHash` |
+| [**⬇️ `Keyflow-Setup-2.0.0.exe`**](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/Keyflow-Setup-2.0.0.exe) **(recommended)** | **Installer** for Windows x64 (48.6 MiB): Start Menu/Desktop shortcuts, an uninstall entry, an English/Vietnamese wizard | Nothing else |
+| [⬇️ `Keyflow-2.0.0-win-x64.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/Keyflow-2.0.0-win-x64.zip) | Portable **self-contained** build (66.4 MiB): unzip and run `PianoPath.exe` | Nothing else |
+| [⬇️ `Keyflow-2.0.0-win-x64-fd.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/Keyflow-2.0.0-win-x64-fd.zip) | **Framework-dependent** build (2.6 MiB), far smaller | [.NET 10 Desktop Runtime (x64)](https://dotnet.microsoft.com/download/dotnet/10.0) |
+| [⬇️ `Keyflow-2.0.0-win-arm64.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/Keyflow-2.0.0-win-arm64.zip) | Windows on ARM, self-contained (53.0 MiB) | Nothing else |
+| [🔐 `SHA256SUMS.txt`](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/SHA256SUMS.txt) | SHA-256 checksums for all 4 release packages | PowerShell `Get-FileHash` |
 
 Run the installer and you are done; for a ZIP, **unzip the whole folder and run `PianoPath.exe`** — never
 separate the `.exe` from its folder:
 
 ```
-Keyflow-1.0.0-win-x64\
+Keyflow-2.0.0-win-x64\
 ├── PianoPath.exe              ← the single executable
 ├── LICENSE.txt                ← the MIT licence, which has to travel with copies
 └── Assets\
@@ -86,7 +86,7 @@ Keyflow-1.0.0-win-x64\
 ```
 
 - **Checking a download**: each release carries `SHA256SUMS.txt`; compare with
-  `Get-FileHash .\Keyflow-1.0.0-win-x64.zip -Algorithm SHA256`. The packages are **not code-signed**,
+  `Get-FileHash .\Keyflow-2.0.0-win-x64.zip -Algorithm SHA256`. The packages are **not code-signed**,
   so this is the only way to be sure the file that arrived is the file the pipeline built.
 - **SmartScreen**: because nothing is signed, the first launch shows *"Windows protected your PC"* —
   choose **More info → Run anyway**.

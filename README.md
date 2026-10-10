@@ -2,20 +2,20 @@
 
 ## ⬇️ Tải Keyflow cho Windows
 
-### [**TẢI TRỰC TIẾP `Keyflow-Setup-1.0.0.exe` (Bộ cài Windows x64 · 83,3 MiB)**](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-Setup-1.0.0.exe)
+### [**TẢI TRỰC TIẾP `Keyflow-Setup-2.0.0.exe` (Bộ cài Windows x64 · 48,6 MiB)**](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/Keyflow-Setup-2.0.0.exe)
 
 **Bản khuyên dùng · Windows 10/11 64-bit · không cần cài .NET.** Bấm liên kết trên để tải thẳng bộ cài
 `.exe`, mở tệp và làm theo trình cài đặt (Anh/Việt). Nếu cần bản giải nén chạy ngay, xem bảng
 **[Tải bản phát hành](#tải-bản-phát-hành)** bên dưới, tệp kiểm tra
-[`SHA256SUMS.txt`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/SHA256SUMS.txt) hoặc
-**[trang phát hành v1.0.0](https://github.com/lxmtuu/KeyFlow/releases/tag/v1.0.0-final)**.
+[`SHA256SUMS.txt`](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/SHA256SUMS.txt) hoặc
+**[trang phát hành v2.0.0](https://github.com/lxmtuu/KeyFlow/releases/tag/v2.0.0)**.
 
-> **⬇️ Tải nhanh bộ cài `.exe`:** **[`Keyflow-Setup-1.0.0.exe` (tải trực tiếp)](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-Setup-1.0.0.exe)**
-> · Bản ZIP portable x64: [`Keyflow-1.0.0-win-x64.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-1.0.0-win-x64.zip)
+> **⬇️ Tải nhanh bộ cài `.exe`:** **[`Keyflow-Setup-2.0.0.exe` (tải trực tiếp)](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/Keyflow-Setup-2.0.0.exe)**
+> · Bản ZIP portable x64: [`Keyflow-2.0.0-win-x64.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/Keyflow-2.0.0-win-x64.zip)
 > · Tất cả các gói: **[Releases](https://github.com/lxmtuu/KeyFlow/releases/latest)**
 >
 > **Đây là kho phát hành chính thức, không phải kho mã nguồn.** Kho này chứa các gói cài đặt và tài liệu
-> người dùng của Keyflow tại mốc `v1.0.0`; mã nguồn được quản lý ở kho riêng. Xem
+> người dùng của Keyflow tại mốc `v2.0.0`; mã nguồn được quản lý ở kho riêng. Xem
 > **[Tải bản phát hành](#tải-bản-phát-hành)** bên dưới để chọn gói phù hợp, và mở
 > **[Issues](https://github.com/lxmtuu/KeyFlow/issues)** để báo lỗi.
 >
@@ -49,22 +49,22 @@ Keyflow là ứng dụng desktop Windows (C# · WPF · .NET 10) để **chơi đ
 
 ## Tải bản phát hành
 
-Bản `v1.0.0` đã được phát hành tại **[GitHub Releases](https://github.com/lxmtuu/KeyFlow/releases/tag/v1.0.0-final)**, kèm
-[`SHA256SUMS.txt`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/SHA256SUMS.txt) cho mọi tệp đính kèm. Bấm trực tiếp vào tên tệp trong bảng dưới đây để tải về ngay (bộ cài `.exe` ở dòng đầu tiên là lựa chọn khuyên dùng cho phần lớn máy Windows). Bản mới nhất luôn ở **[https://github.com/lxmtuu/KeyFlow/releases/latest](https://github.com/lxmtuu/KeyFlow/releases/latest)**.
+Bản `v2.0.0` đã được phát hành tại **[GitHub Releases](https://github.com/lxmtuu/KeyFlow/releases/tag/v2.0.0)**, kèm
+[`SHA256SUMS.txt`](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/SHA256SUMS.txt) cho mọi tệp đính kèm. Bấm trực tiếp vào tên tệp trong bảng dưới đây để tải về ngay (bộ cài `.exe` ở dòng đầu tiên là lựa chọn khuyên dùng cho phần lớn máy Windows). Bản mới nhất luôn ở **[https://github.com/lxmtuu/KeyFlow/releases/latest](https://github.com/lxmtuu/KeyFlow/releases/latest)**.
 
 | Tải trực tiếp | Là gì | Máy đích cần gì |
 | --- | --- | --- |
-| [**⬇️ `Keyflow-Setup-1.0.0.exe`**](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-Setup-1.0.0.exe) **(khuyên dùng)** | **Bộ cài** cho Windows x64 (83,3 MiB): tạo shortcut Start Menu/Desktop, mục gỡ cài đặt, wizard Anh/Việt | Không cần cài gì thêm |
-| [⬇️ `Keyflow-1.0.0-win-x64.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-1.0.0-win-x64.zip) | Bản portable **self-contained** (117,3 MiB): giải nén là chạy `PianoPath.exe` | Không cần cài gì thêm |
-| [⬇️ `Keyflow-1.0.0-win-x64-fd.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-1.0.0-win-x64-fd.zip) | Bản **framework-dependent** (54,9 MiB), nhẹ hơn nhiều | [.NET 10 Desktop Runtime (x64)](https://dotnet.microsoft.com/download/dotnet/10.0) |
-| [⬇️ `Keyflow-1.0.0-win-arm64.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/Keyflow-1.0.0-win-arm64.zip) | Windows on ARM, self-contained (105,2 MiB; CI publish, chưa máy ARM nào chạy thử) | Không cần cài gì thêm |
-| [🔐 `SHA256SUMS.txt`](https://github.com/lxmtuu/KeyFlow/releases/download/v1.0.0-final/SHA256SUMS.txt) | Bảng băm SHA-256 của cả 4 gói phát hành | PowerShell `Get-FileHash` |
+| [**⬇️ `Keyflow-Setup-2.0.0.exe`**](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/Keyflow-Setup-2.0.0.exe) **(khuyên dùng)** | **Bộ cài** cho Windows x64 (48,6 MiB): tạo shortcut Start Menu/Desktop, mục gỡ cài đặt, wizard Anh/Việt | Không cần cài gì thêm |
+| [⬇️ `Keyflow-2.0.0-win-x64.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/Keyflow-2.0.0-win-x64.zip) | Bản portable **self-contained** (66,4 MiB): giải nén là chạy `PianoPath.exe` | Không cần cài gì thêm |
+| [⬇️ `Keyflow-2.0.0-win-x64-fd.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/Keyflow-2.0.0-win-x64-fd.zip) | Bản **framework-dependent** (2,6 MiB), nhẹ hơn nhiều | [.NET 10 Desktop Runtime (x64)](https://dotnet.microsoft.com/download/dotnet/10.0) |
+| [⬇️ `Keyflow-2.0.0-win-arm64.zip`](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/Keyflow-2.0.0-win-arm64.zip) | Windows on ARM, self-contained (53,0 MiB) | Không cần cài gì thêm |
+| [🔐 `SHA256SUMS.txt`](https://github.com/lxmtuu/KeyFlow/releases/download/v2.0.0/SHA256SUMS.txt) | Bảng băm SHA-256 của cả 4 gói phát hành | PowerShell `Get-FileHash` |
 
 Cài bằng bộ cài thì xong; dùng bản ZIP thì **giải nén cả thư mục rồi chạy `PianoPath.exe`** — đừng
 tách `.exe` ra khỏi thư mục của nó:
 
 ```
-Keyflow-1.0.0-win-x64\
+Keyflow-2.0.0-win-x64\
 ├── PianoPath.exe              ← file chạy duy nhất
 ├── LICENSE.txt                ← giấy phép MIT, phải đi kèm bản sao
 └── Assets\
@@ -73,7 +73,7 @@ Keyflow-1.0.0-win-x64\
 ```
 
 - **Kiểm tệp tải về**: mỗi release kèm `SHA256SUMS.txt`; đối chiếu bằng
-  `Get-FileHash .\Keyflow-1.0.0-win-x64.zip -Algorithm SHA256`. Các gói **chưa ký số** nên đây là
+  `Get-FileHash .\Keyflow-2.0.0-win-x64.zip -Algorithm SHA256`. Các gói **chưa ký số** nên đây là
   cách duy nhất để chắc tệp nhận được đúng là tệp quy trình trên build ra.
 - **SmartScreen**: vì chưa ký số, lần chạy đầu Windows hiện *"Windows protected your PC"* — chọn
   **More info → Run anyway**.
