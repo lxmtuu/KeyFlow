@@ -1,9 +1,10 @@
 # Changelog · Keyflow
 
-> **Bản tiếng Việt: [CHANGELOG.md](CHANGELOG.md)** · This is the English edition of the same document. The
-> two files carry the same content and **the same list of versions**; `tools/check_sources.py`
-> (`scan_release_version`) compares that list in both against `<Version>` in `PianoPath.csproj`, so neither
-> edition can drift from the other and a new entry cannot sit in the repository without being in a release.
+> **Bản tiếng Việt: [CHANGELOG.vi.md](CHANGELOG.vi.md)** · This English edition is the primary document and
+> the Vietnamese edition follows it. The two files carry the same content and **the same list of
+> versions**; `tools/check_sources.py` (`scan_release_version`) compares that list in both against
+> `<Version>` in `PianoPath.csproj`, so neither edition can drift from the other and a new entry cannot
+> sit in the repository without being in a release.
 
 Everything a user can see is recorded here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and [semantic versioning](https://semver.org/).
@@ -15,7 +16,7 @@ application reads it back through `AppInfo.Version` (the start-up menu's version
 of these files) are pinned to the same number by `scan_release_version`: forgetting one turns the static
 check red instead of shipping a release that states two versions.
 
-The product's technical limits live in the release README's *[Current limitations](README.en.md#current-limitations)*
+The product's technical limits live in the release README's *[Current limitations](README.md#current-limitations)*
 section and are not repeated here; the internal development roadmap is not part of the public release repository.
 
 ## Unreleased

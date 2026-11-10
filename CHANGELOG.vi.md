@@ -1,9 +1,10 @@
 # Nhật ký thay đổi · Keyflow
 
-> **English version: [CHANGELOG.en.md](CHANGELOG.en.md)** · Bản dưới đây là bản gốc tiếng Việt. Hai tệp ghi
-> cùng một nội dung và **cùng một danh sách phiên bản**; `tools/check_sources.py` (`scan_release_version`)
-> đối chiếu danh sách đó của cả hai với `<Version>` trong `PianoPath.csproj`, nên không bản nào lệch khỏi
-> bản kia và một mục mới không thể nằm trong repo mà không nằm trong bản phát hành.
+> **English version (bản chính): [CHANGELOG.md](CHANGELOG.md)** · Bản dưới đây là bản tiếng Việt của cùng
+> tài liệu; bản tiếng Anh là bản chính. Hai tệp ghi cùng một nội dung và **cùng một danh sách phiên
+> bản**; `tools/check_sources.py` (`scan_release_version`) đối chiếu danh sách đó của cả hai với
+> `<Version>` trong `PianoPath.csproj`, nên không bản nào lệch khỏi bản kia và một mục mới không thể
+> nằm trong repo mà không nằm trong bản phát hành.
 
 Mọi thay đổi người dùng nhìn thấy được ghi ở đây, theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/)
 và [semantic versioning](https://semver.org/lang/vi/).
@@ -14,7 +15,7 @@ dụng tự đọc nó qua `AppInfo.Version` (nhãn phiên bản của menu kh�
 `/DAppVersion=` trong hai README, mục mới nhất của hai tệp này) được `scan_release_version` ghim vào cùng
 một số: quên một bản sao là kiểm tra tĩnh đỏ, không phải một bản phát hành nói hai số phiên bản.
 
-Giới hạn kỹ thuật của sản phẩm nằm ở mục *[Giới hạn hiện tại](README.md#giới-hạn-hiện-tại)* của README phát hành
+Giới hạn kỹ thuật của sản phẩm nằm ở mục *[Giới hạn hiện tại](README.vi.md#giới-hạn-hiện-tại)* của README phát hành
 và không được lặp lại ở đây; tài liệu kế hoạch phát triển nội bộ không nằm trong kho phát hành công khai.
 
 ## Unreleased

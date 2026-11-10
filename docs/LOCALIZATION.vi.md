@@ -1,5 +1,10 @@
 # Đa ngôn ngữ: kiến trúc, quy ước và cách thêm một ngôn ngữ mới
 
+> **English version (bản chính): [LOCALIZATION.md](LOCALIZATION.md)** · Bản dưới đây là bản tiếng Việt của
+> cùng tài liệu; bản tiếng Anh là bản chính. Các tệp nguồn, công cụ và workflow nêu bên dưới
+> (`Localization/`, `Ui/`, `tools/`, `installer/`, `build.yml`, `docs/ROADMAP.md`…) là đường dẫn trong
+> kho mã nguồn của Keyflow.
+
 Tài liệu này mô tả cách Keyflow dịch giao diện: **khoá là câu chữ tiếng Anh trong mã nguồn**, mỗi
 ngôn ngữ là **một tệp bảng**, và mọi nhãn trên màn hình **tự vẽ lại khi đổi ngôn ngữ** mà không khởi
 động lại ứng dụng. Phần danh mục trang và nhóm điều hướng đi kèm nằm ở
@@ -28,7 +33,7 @@ ngôn ngữ là **một tệp bảng**, và mọi nhãn trên màn hình **tự 
 | `Localization/Strings.Vietnamese.cs` | Bảng tiếng Việt, đúng cùng tập khoá, theo cùng thứ tự |
 | `Ui/DeviceOption.cs` | Bản ghi `(Id, Display)`: hai hàng "Computer keyboard only" / "No MIDI output" dịch được, thiết bị thật do Windows đặt tên thì giữ nguyên |
 | `Ui/MainWindow.Language.cs` | Lối vào phía giao diện: `ApplyLanguage`, `RetranslateSurfaces`, tiêu đề nhóm điều hướng, caption combo thiết bị |
-| `Ui/MainWindow.Settings.cs` | Trang **General** (nhóm APP) với các chip ngôn ngữ; ô tìm kiếm của dock khớp cả tiếng Anh lẫn tiếng Việt |
+| `Ui/MainWindow.Settings.cs` | Trang **Ứng dụng** (`Application`, nhóm PHIÊN & ỨNG DỤNG) với các chip ngôn ngữ; ô tìm kiếm của dock khớp cả tiếng Anh lẫn tiếng Việt |
 | `Ui/MainWindow.xaml` | `local:Loc.Localize="True"` trên mọi phần tử mang chữ tĩnh; thẻ **INTERFACE LANGUAGE** ở menu khởi động |
 | `tools/check_sources.py` | Kiểm tĩnh: hai bảng phải cùng tập khoá, placeholder còn nguyên, **mọi chuỗi mã nguồn in ra phải là một khoá của inventory**, và **mọi khoá của inventory phải còn được một tệp mã nguồn giữ** (`scan_dead_keys`: một khoá không nguồn nào in ra là câu dịch vô ích — nó chỉ còn sống trong hai bảng, và lần đổi chữ sau sẽ để lại bên cạnh nó một bản sao thứ hai của cùng câu đó) |
 
@@ -41,7 +46,7 @@ Loc.Set(caption, "Falling notes");                         // nhãn sống: tự
 Loc.Set(tooltip, "Reset fall speed", FrameworkElement.ToolTipProperty);
 Loc.Format(status, "Fall speed {0}", value);               // bản mẫu sống, có tham số
 Loc.Bind(label, () => Loc.T(name) + suffix);               // khi văn bản phải tính ra
-Loc.Page(SettingsPages.Theme);                             // tên trang/nhóm qua cùng một bảng
+Loc.Page(SettingsPages.Overview);                          // tên trang/nhóm qua cùng một bảng
 Loc.OnChanged(RefreshChoiceCaptions);                      // mặt dựng lại từ đầu (không phải label)
 Loc.Apply("vi");  Loc.Refresh();                           // đổi ngôn ngữ rồi vẽ lại
 ```
@@ -57,7 +62,7 @@ Ba điều đáng nhớ khi dùng:
 * **Đừng so sánh văn bản đã dịch.** Muốn biết trạng thái, so sánh giá trị đã lưu
   (`_visualSettings.BackgroundMode == "Image"`), đừng so sánh `label.Text == "Image"`.
   `VerificationSuite` đã được viết lại theo quy tắc này: nó so với `Loc.T("SALAMANDER GRAND · SETUP REQUIRED")`
-  và `Loc.T("Style")` chứ không so với chuỗi tiếng Anh cứng.
+  và `Loc.T(SettingsPages.Overview)` chứ không so với chuỗi tiếng Anh cứng.
 
 ### Marker trong XAML
 
@@ -97,8 +102,9 @@ Literal tiếng Anh vẫn nằm trong XAML nên markup đọc tự nhiên và th
    dotnet run --project .\PianoPath.csproj -c Release -- --verify   # UntranslatedKeys phải rỗng
    ```
 
-5. **Ảnh preview (tuỳ chọn)** — `build.yml` render ảnh README bằng `--lang=en`; thêm một mục
-   `$shots` với `--lang=ja` nếu muốn có ảnh cho ngôn ngữ mới.
+5. **Ảnh preview (tuỳ chọn)** — `build.yml` render ảnh README cho từng ngôn ngữ: vòng
+   `foreach ($lang in @('en', 'vi'))` chạy mọi mục của `$shots` với `--lang=$lang` và ghi vào
+   `docs/previews/$lang/`. Thêm `'ja'` vào vòng đó nếu muốn có ảnh cho ngôn ngữ mới.
 
 Không có bước nào sửa renderer, `App.xaml`, `PianoVisualSettings` hay `visual-settings.json`.
 
@@ -154,19 +160,25 @@ danh sách việc cho dịch giả (chính `Strings.English.cs`).
   thì thêm khoá vào `Strings.English.cs` + `Strings.Vietnamese.cs` (đúng thứ tự ordinal) — bộ kiểm
   tĩnh và `--verify` sẽ cùng báo nếu quên. Tên do người dùng đặt (thiết bị, tệp, preset tự lưu) đi
   thẳng ra màn hình nguyên văn chứ không đi qua `Loc`, nên không bị tính là chuỗi lạ.
-* Chip phím tắt trong thẻ F1: nhãn mô tả (`Click the keys`, `MIDI keyboard`, `Pointer idle`,
-  `Drag the timeline`, `Practice modes`) **đã** đi qua `Loc.Set` và có khoá trong inventory; chỉ cột
-  phím (`A W S …`, `Space`, `A · B · ×`) là in nguyên văn theo đúng quy ước "phím thật không dịch".
+* Chip phím tắt trong thẻ F1: tiêu đề từng nhóm và câu mô tả bên cạnh mỗi chip **đã** đi qua `Loc.Set`
+  và có khoá trong inventory. Riêng cột chip thì in nguyên văn. Với phím thật (`A W S …`, `Space`,
+  `A · B · ×`) đó là đúng quy ước "phím thật không dịch"; năm chip mô tả thao tác chứ không phải phím
+  (`Click the keys`, `MIDI keyboard`, `Pointer idle`, `Drag the timeline`, `Practice modes`) cũng đang
+  in theo cách đó nên vẫn là tiếng Anh ở mọi ngôn ngữ — đây là phần còn mở.
 * `VisualPresets.SanitizeName` trả `"My preset"` làm **tên tệp** khi người dùng lưu mà không đặt tên;
   nhãn hiển thị của nó thì đã dịch (`Preset của tôi`) vì `DisplayName` đi qua bảng. Hệ quả phụ: một preset
   do người dùng tự đặt tên trùng hẳn một khoá của bảng (ví dụ `Custom`) sẽ bị dịch khi in — vô hại nhưng
   nên giới hạn `DisplayName` cho đúng các preset có sẵn (hiện đã làm vậy).
 * Mô tả preset *do người dùng lưu* là một chuỗi ghép (`User preset · x.json`); nó đã theo ngôn ngữ
   lúc dựng danh sách, nhưng một preset tự đặt tên tiếng Việt thì không nên bị `T()` chạm vào.
-* Tài liệu có hai bản: `README.md` (tiếng Việt, bản gốc) và `README.en.md` (tiếng Anh). `scan_readme`
-  trong `tools/check_sources.py` quét **cả hai** (ảnh, anchor, liên kết nội bộ) và bắt buộc mỗi bản
-  phải trỏ sang bản kia; `scan_cli_and_samples` kiểm bảng tham số dòng lệnh của từng bản, nên bản
-  tiếng Anh không thể thiếu một switch mà bản tiếng Việt đã có.
+* Tài liệu có hai bản và **tiếng Anh là bản chính**: tệp tiếng Anh mang tên trơn, tệp tiếng Việt thêm
+  `.vi` trước phần mở rộng — `README.md` / `README.vi.md`, `CHANGELOG.md` / `CHANGELOG.vi.md`,
+  `docs/LOCALIZATION.md` / `docs/LOCALIZATION.vi.md`, `docs/presentation/README.md` /
+  `docs/presentation/README.vi.md`. (`README.en.md` và `CHANGELOG.en.md` chỉ còn là tệp trỏ ngắn sang
+  tên mới, dành cho các liên kết đã công bố trước khi đổi.) `scan_readme` trong `tools/check_sources.py`
+  quét **cả hai** README (ảnh, anchor, liên kết nội bộ) và bắt buộc mỗi bản phải trỏ sang bản kia;
+  `scan_cli_and_samples` kiểm bảng tham số dòng lệnh của từng bản, nên không bản nào có thể thiếu một
+  switch mà bản kia đã ghi.
 * **Bộ cài (`installer/`)** là mặt thứ ba có chữ hiển thị, và nó không đi qua `Loc`: Inno Setup đọc
   `installer/Languages/Vietnamese.isl` (UTF-8 **có BOM** để trình biên dịch biết ngay là Unicode),
   liệt kê **sau** `compiler:Default.isl` trong `MessagesFile` nên tệp chỉ *ghi đè* 108 câu mà trình
@@ -179,15 +191,13 @@ danh sách việc cho dịch giả (chính `Strings.English.cs`).
   thành lỗi build. Quy ước dịch vẫn theo §5 (`Huỷ`, `tệp`, `thư mục`, `shortcut`, `Start Menu`).
 * RTL (Ả Rập, Do Thái, Ba Tư) cần thêm `FlowDirection`, đảo `Margin`/`Grid` cột và đường rơi của nốt;
   bảng cho một ngôn ngữ RTL phải đi kèm đợt việc đó, không nên thêm bảng suông.
-* `installer/Keyflow.iss` vẫn dùng một tệp ngôn ngữ Inno; bản dịch installer tiếng Việt là việc riêng
-  (xem `docs/ROADMAP.md`).
 
 ## 10. Ảnh giao diện: chỉ ảnh do ứng dụng render
 
 `docs/previews/` **chỉ chứa ảnh do chính `PianoPath.exe` render trong CI** (`--snapshot`), chia làm hai bộ:
-`docs/previews/vi/` cho `README.md` và `docs/previews/en/` cho `README.en.md`, mỗi bộ chụp cùng danh sách
+`docs/previews/en/` cho `README.md` và `docs/previews/vi/` cho `README.vi.md`, mỗi bộ chụp cùng danh sách
 chủ đề (`$shots` trong `build.yml`) bằng đúng ngôn ngữ của bản README đọc nó (cộng `docs/previews/presets.jpg`,
-gallery mọi preset do một bước riêng của cùng workflow dựng, dùng chung cho cả hai bản). Screenshot của người dùng — kể cả ảnh rất đẹp cóảnh nền tự chọn — không commit vào đây, vì hai lý do: ảnh sẽ lệch khỏi UI thật ngay lần sửa giao diện
+gallery mọi preset do một bước riêng của cùng workflow dựng, dùng chung cho cả hai bản). Screenshot của người dùng — kể cả ảnh rất đẹp có ảnh nền tự chọn — không commit vào đây, vì hai lý do: ảnh sẽ lệch khỏi UI thật ngay lần sửa giao diện
 kế tiếp, và ảnh nền trong screenshot hầu như luôn là artwork của bên thứ ba, không kèm giấy phép cho repo MIT.
 
 Muốn tài liệu chiếu được một tính năng thì làm cho CI render được tính năng đó. Ảnh nền là ví dụ đã làm
@@ -203,7 +213,7 @@ kiểm đúng hợp đồng đó, nên hành vi "chỉ xem, không ghi" không t
 
 * mọi `![...]()` trỏ vào `docs/previews/` phải hoặc đã tồn tại, hoặc có tên trong `$shots` của workflow —
   được phép chậm hơn README đúng một commit, vì chính commit render ảnh sẽ bắt kịp — **và** bản `README.md`
-  chỉ được trỏ vào `docs/previews/vi/`, bản `README.en.md` chỉ được trỏ vào `docs/previews/en/`, còn
+  chỉ được trỏ vào `docs/previews/en/`, bản `README.vi.md` chỉ được trỏ vào `docs/previews/vi/`, còn
   workflow phải thật sự render cả hai ngôn ngữ (vòng `foreach ($lang in @('en', 'vi'))`);
 * mọi tham số dòng lệnh mà `App.xaml.cs` hoặc `VerificationSuite` đọc phải có trong bảng *Tham số dòng
   lệnh* của README và ngược lại, còn mọi tham số + đường dẫn `build.yml` truyền cho `PianoPath.exe` phải

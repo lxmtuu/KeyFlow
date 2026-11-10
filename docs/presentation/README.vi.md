@@ -1,9 +1,12 @@
 # Bản thuyết trình sản phẩm · Keyflow v1.0.0 (lưu trữ)
 
+> **English version (bản chính): [README.md](README.md)** · Bản dưới đây là bản tiếng Việt của cùng tài
+> liệu; bản tiếng Anh là bản chính. Bộ slide chỉ có bản tiếng Việt.
+
 Bộ slide lưu trữ cho bản phát hành **Keyflow 1.0.0** (02/10/2026), phản ánh đúng phiên bản tại ngày đó.
 Bản v1.0.0 còn mô tả piano SF2 đóng gói; **đây không phải tài liệu sản phẩm hiện hành**. Mô hình âm thanh
-hiện tại là Salamander Grand Piano V3 tải riêng, SFZ-only; xem [README](../../README.md) và
-[CHANGELOG](../../CHANGELOG.md). Mỗi slide là một trang, khổ 16:9.
+hiện tại là Salamander Grand Piano V3 tải riêng, SFZ-only; xem [README](../../README.vi.md) và
+[CHANGELOG](../../CHANGELOG.vi.md). Mỗi slide là một trang, khổ 16:9.
 
 | Tệp | Định dạng | Nội dung |
 | --- | --- | --- |
@@ -35,8 +38,9 @@ hiện tại là Salamander Grand Piano V3 tải riêng, SFZ-only; xem [README](
 
 ## Ghi chú
 
-- Ảnh chụp trong các slide lấy từ [`docs/previews/vi/`](../previews/vi) — do chính
-  ứng dụng render trong CI (`--snapshot`), không phải ảnh dàn dựng.
+- Ảnh chụp trong các slide lấy từ bộ ảnh tiếng Việt [`docs/previews/vi/`](../previews/vi) tại
+  thời điểm 1.0.0 — do chính ứng dụng render trong CI (`--snapshot`), không phải ảnh dàn dựng.
+  Thư mục đó nay hiển thị bản hiện hành nên ảnh trong đó không còn là ảnh trong bộ slide.
 - Mọi số liệu và phát biểu trong slide bám sát tài liệu phát hành v1.0.0; khi có
   bản phát hành mới, cập nhật lại nội dung rồi sinh lại hai tệp để hai định dạng
   không lệch nhau.
