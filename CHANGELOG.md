@@ -1,271 +1,288 @@
-# Nhật ký thay đổi · Keyflow
+# Changelog · Keyflow
 
-> **English version: [CHANGELOG.en.md](CHANGELOG.en.md)** · Bản dưới đây là bản gốc tiếng Việt. Hai tệp ghi
-> cùng một nội dung và **cùng một danh sách phiên bản**; `tools/check_sources.py` (`scan_release_version`)
-> đối chiếu danh sách đó của cả hai với `<Version>` trong `PianoPath.csproj`, nên không bản nào lệch khỏi
-> bản kia và một mục mới không thể nằm trong repo mà không nằm trong bản phát hành.
+> **Bản tiếng Việt: [CHANGELOG.md](CHANGELOG.md)** · This is the English edition of the same document. The
+> two files carry the same content and **the same list of versions**; `tools/check_sources.py`
+> (`scan_release_version`) compares that list in both against `<Version>` in `PianoPath.csproj`, so neither
+> edition can drift from the other and a new entry cannot sit in the repository without being in a release.
 
-Mọi thay đổi người dùng nhìn thấy được ghi ở đây, theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/)
-và [semantic versioning](https://semver.org/lang/vi/).
+Everything a user can see is recorded here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
+and [semantic versioning](https://semver.org/).
 
-Số phiên bản chỉ được viết xuống **một** chỗ trong mã nguồn — `<Version>` của `PianoPath.csproj` — và ứng
-dụng tự đọc nó qua `AppInfo.Version` (nhãn phiên bản của menu khởi động, hộp thoại About, báo cáo
-`--bench`). Những bản sao không đọc được assembly lúc chạy (`installer\Keyflow.iss`, ví dụ `git tag` và
-`/DAppVersion=` trong hai README, mục mới nhất của hai tệp này) được `scan_release_version` ghim vào cùng
-một số: quên một bản sao là kiểm tra tĩnh đỏ, không phải một bản phát hành nói hai số phiên bản.
+The version number is written down in **one** place in the code — `<Version>` in `PianoPath.csproj` — and the
+application reads it back through `AppInfo.Version` (the start-up menu's version label, the About box, the
+`--bench` report). The copies that cannot read an assembly at run time (the fallback in
+`installer\Keyflow.iss`, the `git tag` and `/DAppVersion=` examples in both READMEs, the newest entry of both
+of these files) are pinned to the same number by `scan_release_version`: forgetting one turns the static
+check red instead of shipping a release that states two versions.
 
-Giới hạn kỹ thuật của sản phẩm nằm ở mục *[Giới hạn hiện tại](README.md#giới-hạn-hiện-tại)* của README phát hành
-và không được lặp lại ở đây; tài liệu kế hoạch phát triển nội bộ không nằm trong kho phát hành công khai.
+The product's technical limits live in the release README's *[Current limitations](README.en.md#current-limitations)*
+section and are not repeated here; the internal development roadmap is not part of the public release repository.
 
 ## Unreleased
 
 ## 2.2.0 — 2026-10-18
 
 ### AR overlay
-- Lite, Standard và Ultra dùng cùng đường chiếu 3D đã hiệu chỉnh cho nốt phối cảnh và thanh nhấn; Quality chỉ đổi ánh sáng/hiệu ứng, không đổi đường đi. Nốt MIDI Perform mới xuất hiện ngay tại phím ở frame đầu. Giao diện Calibrate nói rõ mũi tên vàng là hướng Learn chạy về phím, còn nốt Perform đi lên theo hướng ngược lại; nút căn lên màn hình đặt hướng đi lên cho Perform.
-- Thanh nhấn giữ phím luôn rõ theo mặc định, không tự mờ dần khi dài ra; pha nhả vẫn giảm sáng để thanh biến mất. Graph vòng đời tùy chọn vẫn cho phép chỉnh độ mờ khi đang giữ phím.
+- Lite, Standard and Ultra now keep the same calibrated 3D projection for perspective notes and live press bars; quality changes lighting/effects, not their path. A fresh Perform MIDI note starts at the calibrated key on its first frame. The calibration UI now explains that its yellow arrow is Learn travel toward the keys while Perform rises the opposite way, and the screen-up helper aims the Perform rise upward.
+- Held live press bars stay fully visible by default instead of fading as they stretch; release dim remains, and the optional lifetime graph still gives explicit control over opacity while held.
 
-### Âm thanh
-- Sửa lỗi cài Salamander trên Windows: đóng stream ghi độc quyền của file `.part` sau khi tải và xác minh, trước khi gọi `File.Move`; thêm regression test bảo đảm file đã xác minh có thể được chuyển đi.
-- Thêm thanh **Reverb amount** 0–150% (mặc định 100%), cập nhật trực tiếp cho hall và convolution reverb. Giá trị được lưu cục bộ, không bị preset hay mã chia sẻ thay đổi.
+### Audio
+- Fix the Windows Salamander install failure by closing the exclusive `.part` writer after download and verification and before `File.Move`; add a regression test that moves the verified sample.
+- Add a live 0–150% Reverb amount slider (100% by default), applied to hall and convolution reverb. The value is saved locally and is not changed by presets or share codes.
 
 ## 2.1.1 — 2026-10-16
 
-### Phát hành gói bất biến đúng quy trình
-- **Bản tải xuống đầu tiên của đợt 2.1:** bao gồm toàn bộ tính năng hiệu ứng/AR/Settings liệt kê ở 2.1.0 bên dưới. Release nguồn 2.1.0 đã bị publish khi chưa có asset và bị immutable khóa; không có gói tải, không đổi/xóa/tái sử dụng tag đó.
-- Dùng duy nhất sự kiện tạo tag để tránh hai lượt publish. Workflow tạo draft, upload đủ gói rồi publish; không tắt immutability và không cố ghi đè release bất biến.
+### Correct immutable package publication
+- **First downloadable build of the 2.1 feature set:** includes all particle/AR/Settings features listed under 2.1.0 below. The source 2.1.0 release was published without assets and locked by immutability; it has no downloadable build and its tag is not moved, deleted or reused.
+- A single tag-creation trigger avoids duplicate publication. Create a draft, upload the complete packages, then publish; immutability is not disabled and immutable releases are not overwritten.
 
 ## 2.1.0 — 2026-10-16
 
-### Settings, hiệu ứng hạt và xuất AR
-- **Settings mới gồm 12 nhóm** theo bố cục đã duyệt: Nốt & màu → Nhấn phím → Giữ phím → Thả phím → Ánh sáng; thêm Nâng cao, tìm VI/EN không dấu và alias cho 13 trang cũ. Preset/share code, camera/calibration, Audio/MIDI, luyện tập/lịch sử, ghi hình, theme và hồ sơ vẫn giữ handler/ID cũ. Stage/AR trên header là ngữ cảnh cài đặt, không tự đổi camera hay output.
-- **Hiệu ứng hạt nâng cấp** là opt-in, mặc định tắt cho look cũ. Wisps/Flames và vật liệu nhả Float Up/Dissolve/Smoke dùng chung cho GPU Live Stage và AR; AR chia cap 192 theo vai trò/nhóm nốt. Thêm preset Prism Flow - Wisps / Prism Flow - Flames. Renderer phần mềm giữ classic.
-- **Xuất AR offline giữ vòng đời hạt liên tục** trong mỗi take thay vì tạo lại simulation mỗi frame; dùng clock đã lập kế hoạch và substep tối đa 50 ms. Chính sách camera-file nửa tốc độ khung hình cũ vẫn giữ; không tuyên bố sửa mọi trường hợp đồng bộ A/V hoặc đã thử webcam/hardware ARM.
+### Settings, particle effects and AR export
+- **Settings now has 12 approved groups:** Notes & color → Press → Hold → Release → Lighting, with Advanced sections, accent-insensitive VI/EN search and aliases for all 13 legacy pages. Presets/share codes, camera/calibration, Audio/MIDI, practice/history, recording, themes and profiles retain their existing handlers/IDs. The Stage/AR header selects a settings context, not a camera/output mode.
+- **Upgraded particle effects are opt-in**, off for existing looks. Wisps/Flames and Float Up/Dissolve/Smoke release materials are shared by GPU Live Stage and AR, with a role/note-group fair allocation of the AR cap of 192. Includes Prism Flow - Wisps / Prism Flow - Flames presets; software rendering keeps the classic effects.
+- **Offline AR exports retain particle lifecycle state** throughout each take instead of recreating simulation on every frame, using the planned scene clock and substeps of at most 50 ms. The legacy half-rate camera-file policy remains; this is not a universal A/V-sync fix or webcam/ARM hardware certification.
 
 ### AR overlay
-- **AR render-to-video — giao diện xuất (S7 trọn vẹn)**: thẻ mới **AR RENDER‑TO‑VIDEO** ở trang Recording — một nút RENDER AR TAKE… render offline bài hát đang mở trên video camera đã hiệu chỉnh: không đồng hồ live, bước thời gian cố định, đúng look máy đang dùng (lớp AR, watermark kind‑16, watermark… mọi lớp), tiếng piano mix khớp tick ra `.wav` cạnh AVI (độ phân giải/fps theo lựa chọn OUTPUT; Record audio + Watermark đều tôn trọng), kèm dòng ffmpeg ghép khi xong. Song → script sự kiện làm code thuần (`ArVideoExportScript`, xUnit `SongExportScriptTests`); verify chạy đường thật với MP4 do chính app ghi + reader decode: sọc sáng của file tăng đều theo từng tick của engine.
-- **AR render-to-video — phần watermark**: dải «KEYFLOW» của toggle **Watermark** giờ do chính GPU in lên khung hình (sprite kind 16 + texture `MarkTex`), nên bản ghi GPU và take offline đều mang đúng dải mà live stage đang hiển thị; placement (giữa màn, đúng 18 DIP trên đường bàn phím, chỉ co lại khi khung hình hẹp) là code thuần có xUnit. Verify so byte: cùng một tick có/không watermark khác đúng và chỉ ở vùng strip.
-- **AR render-to-video — phần giọng**: mỗi take offline giờ có thêm file `.wav` nằm cạnh AVI/PNG — engine mix piano theo đúng tick của video (sự kiện nét phát ra đúng khung hình nó xuất hiện, các block 44.1 kHz pace theo từng tick nên tổng số mẫu khớp sample-exact kể cả ở fps lẻ như 13), take không nét cho file im lặng đúng dài. Kến trúc: hook tuỳ chọn `audio` (synth + script sự kiện + `WavWriter`) đi qua engine `Run`, caller sở hữu và đóng writer/synth. Verify dựng SFZ tổng hợp: 22050 mẫu cho đúng 6 khung 12 fps, âm lớn ở các tick giữ phím và gần-im ngay mục onset.
-- **Rà soát phát hành:** toolbar bắt đầu tính idle từ frame đầu thay vì thời gian dựng cửa sổ; nút MORE của live-bar coverage không bị Nâng cao chặn. Pipeline public giữ nguyên workspace/gói build, dùng Git index riêng và lệnh PowerShell append hợp lệ; các cổng test/native của release vẫn bắt buộc.
+- **AR render-to-video — export UI (S7 complete)**: the Recording page gains an **AR RENDER‑TO‑VIDEO** card — RENDER AR TAKE… renders the loaded song over the calibrated camera video file offline: no live clock, a fixed time step, the machine's exact look (AR overlay, the kind‑16 watermark strip, every layer), the piano mixed tick-exact into a `.wav` beside the AVI (resolution cap and fps follow the OUTPUT choices; Record audio and Watermark are honoured), with the ffmpeg mux line printed on completion. Song → tick script is pure code (`ArVideoExportScript`, xUnit `SongExportScriptTests`); verify drives the real route with an MP4 written by the app's own recorder and decoded by its reader: the fixture's stripe brightens in step with every engine tick.
+- **AR render-to-video — watermark**: the **Watermark** toggle's «KEYFLOW» strip is now drawn by the GPU itself (sprite kind 16 + the `MarkTex` texture), so the GPU screen recording and every offline take carry exactly what the live stage shows; the placement (centred, the stage's own 18 DIPs above the key line, shrinking only on narrow frames) is pure code with xUnit tests. Verify byte-compares one tick with and without the strip: the difference lights exactly the strip's rect and nothing else.
+- **AR render-to-video — voice half**: every offline take can now also leave a `.wav` next to the AVI/PNG — the engine mixes the piano at exactly the video's ticks (note events fire with the frame they appear on, 44.1 kHz blocks pace each tick so the sample count lands sample-exact even at awkward rates like 13 fps), and a take without notes yields silence of the right length. Shape: an optional `audio` hook (synth + event script + `WavWriter`) through the engine's `Run`; the caller owns and closes the writer/synth. Verify drives a synthetic SFZ: 22050 samples for exactly six 12 fps frames, loud through the held ticks and near-silent right at the onset.
+- **Release hardening:** the toolbar starts its idle clock at the first rendered frame, and live-bar coverage MORE is not hidden behind a second Advanced gate. Public publishing preserves the source/packages, stages through an isolated Git index and uses valid PowerShell append commands; all release test/native gates remain required.
 
-- **Render-to-video AR — nửa khung** (roadmap §14.10, AR‑S7 phần đầu): móng cho việc xuất cảnh AR ra video offline. `Video/ArVideoRenderProfile.cs` (thuần) lập kế hoạch kích thước/fps/số khung với mọi clamp an toàn — hai cạnh chẵn đúng chuẩn AVI, trần 60 fps khớp cả hai writer hiện có, trần cạnh dài để camera quá nét không đốt GPU vô ích — kèm lựa chọn downsample 1/2/4 bằng trung bình hộp 2×2 (`Video/BgraPack.cs`, thuần). `Video/ArRenderToVideo.cs` là engine quét offline: với một script feed cho từng tick, mỗi khung xuất tiến cảnh đúng `1/fps` với seed cố định — không đồng hồ của riêng nó — nên hai lần quét cùng script ra **byte-identical**, và tick nào cũng khớp từng byte với một lượt render giống-hệt-loop-cứng-cùng-dt-cùng-seed (đúng ý «so khung live ↔ render» của roadmap). Writer dùng lại `AviVideoRecorder`/`PngSequenceRecorder` hiện có ở đúng kích thước/fps đã lên kế hoạch. Kiểm chứng: hai bộ xUnit thuần (`VideoRenderProfileTests`, `BgraPackTests`) và block `VerifyArRenderToVideo` trong `--verify` — take AVI 200×112@12fps đọc lại với sọc sáng bên trái camera cùng ánh phím C4 sáng đúng tick nhấn, take PNG hạ 320×180→160×90 sáu khung kèm manifest. Âm thanh bài hát (mixdown) và watermark phía GPU + giao diện xuất file ở phần sau của AR‑S7, chưa nằm trong mảng này.
-- **Mã chia sẻ diện mạo lên bản 2 — look đi cùng graph** (roadmap §14.9): COPY CODE giờ phát hành mã `KEYFLOW-LOOK-2:…`, báo hiệu payload mang cùng look toàn bộ graph AR — Độ rộng nốt theo velocity, Fade-in nốt theo velocity, Độ mờ vệt nhấn theo vòng đời — nên máy nhận vẽ lại đúng các đường cong đó chứ không chỉ màu sắc/tỉ trọng. APPLY CODE **vẫn đọc được mọi mã bản 1** (`KEYFLOW-LOOK-1:…`) từng được chia, nguyên từng bit, vì phong bì JSON vốn đã trọn vẹn từ đầu; mã của phiên bản khác vẫn bị từ chối với đúng lỗi «được tạo bởi một phiên bản Keyflow khác». Ảnh nền và camera vẫn ở lại máy gửi như trước. Phần vận chuyển mã tách ra `Stage/ShareCodeEnvelope.cs` (thuần, không settings) để xUnit kiểm trên mọi máy: `ShareCodeEnvelopeTests` sáu fact (phát hành v2 URL-safe, mã bản 1 mở nguyên bit, lý do cho mọi mã hỏng, mã bị chat wrap vẫn mở, zip-bomb dừng ở mức giới hạn payload). Mức look/graph được block `VerifyPresetShareCodes` mở rộng khóa trong `--verify`.
-- **Ngân sách hiệu năng AR: lớp phủ tự cắt họ hiệu ứng theo thứ tự cố định khi GPU quá ngân sách** (roadmap §14.8): `Camera/ArQualityBudget.cs` cắm vào bộ adaptive-quality sẵn có vốn đã đang theo dõi thởi gian hình của GPU. Tier xấu đi (Full → BloomReduced → BloomMinimal → AmbientReduced → AmbientMinimal), mỗi nấc mất đúng thêm một họ theo câu roadmap — hạt → pulse → note light → light bars → style nốt (note 3D sụp về lối vẽ phẳng; bản thân note vẫn còn) → impact glow — và trả lại khi áp lực giảm, không động đến setting nào. Phím, đốt và keypress nằm ngoài bảng, nên không hình nào quá ngân sách mà mất được lớp phủ. Khóa bằng bộ xUnit `ArQualityBudgetTests`, block `VerifyArQualityBudget` cùng một trận diễn tập WARP trong `VerifyArNoteProjection` (cut sâu: beam/pulse/impact/particle/note light đều vắng, key tint và vạch damper vẫn còn; về Full là đèn quay lại nguyên vẹn).
-- **Hình ảnh AR tự tinh chỉnh theo khung nhìn camera** (roadmap §14.7, Thêm 5): `Camera/ArViewPresets.cs` — bảng thuần khóa theo id khung nhìn máy đã biết, không phải một setting mới. Camera nghiêng (45°, đánh dấu tự do, legacy) giữ nguyên độ cao siêu mỏng cứ catalogue (flare impact 0,2 cm trên phím, pulse tối thiểu 0,3 cm trên mặt phẳng phím) và các quad đứng dựng — hold arc, beam sáng — vẫn vẽ; khung nhìn **90° trực đỉnh** thì lift thu còn 0,05 cm / 0,1 cm (nhìn thẳng xuống, mặt phẳng phím chính là ảnh) còn các quad đứng bị giấu hẳn, vì từ trên cao chúng ép thành sợi nhiễu mỏng như tóc. Id khung nhìn lạ hoặc rỗng quay về hàng nghiêng, đúng cách calibration store chuẩn hóa cùng id đó, và preset/mã chia sẻ vẫn không mang theo gì — id khung nhìn thuộc máy. Khóa bộ xUnit `ArViewPresetTests` và block `VerifyArNoteProjection` mở rộng trong `--verify` (overhead: beam/arc bị giấu, impact light/pulse/particle vẫn chiếu nguyên vẹn trên WARP).
-- **Mẹo đặt camera ngay trong cửa sổ Calibrate, kèm canh tay trong khung hình** (roadmap §14.7, Thêm 4): cửa sổ calibrate giờ nói luôn hai điều ai cũng quên lần đầu — *treo camera qua vai, nhìn dọc hàng phím* (đặt ngay trên đầu thì đọc được mọi phím; đặt ngang phím thì mất phím xa) và *tránh ống kính quá rộng* (ultra-wide làm hàng phím cong về mép ảnh, đánh dấu trên hàng cong không bao giờ bám phím thật) — kèm nhắc đánh dấu khi tay ở ngoài khung hình. Và cửa sổ tự canh: một trạm quan sát màu da theo lobe Y′CbCr quét still đang hiển thị, khi tỉ lệ màu da vượt ngưỡng — khắp ảnh trước khi đặt đủ góc, chỉ bên trong vùng phím sau khi đủ góc — dòng note khẽ nhắc đưa tay ra; đây là lời khuyên chứ không phải cửa chặn, và gỗ sồi nắng vẫn có thể mượn màu da mà không hại ai. Khóa bộ xUnit `CalibrationAdviceTests` và block `VerifyCalibrationAdvice` trong `--verify`.
-- **Bản sao căn chỉnh — xuất/nhập mọi calibration của camera đang dùng** (roadmap §14.7, Thêm 3): hai nút mới trong thẻ KEYBOARD ALIGNMENT. **EXPORT CALIBRATION** gom mọi calibration đã lưu của camera (mọi khung nhìn, kích thước ảnh và cỡ phím) ra một tệp JSON `keyflow-ar-calibration` mang đi được, kèm ảnh PNG chụp frame hiện tại của camera đặt cạnh tệp để sau này nhìn là biết của camera nào (khôi phục không đọc ảnh). **IMPORT CALIBRATION** đọc một tệp như vậy, khôi phục từng hàng về đúng cameraLink của tệp (rỗng thì về camera đang dùng) và cho mỗi hàng đi qua đúng các kiểm tra của một lần calibrate mới — hàng không đạt được đếm và bỏ qua chứ không bao giờ được vẽ, còn tệp không đúng loại hay tệp của Keyflow mới hơn bị từ chối kèm lý do rõ ràng. Không thêm setting nào: preset và mã chia sẻ vẫn không hề mang calibration như trước. Khóa bằng bộ xUnit `ArCalibrationArchiveTests` và block `VerifyArCalibrationArchive` trong `--verify`.
-- **Đo trôi tự động — AR tự phát hiện camera xê và nhắc đánh dấu lại** (roadmap §14.7, Thêm 2): toggle **Canh khung camera có trôi** trong thẻ KEYBOARD ALIGNMENT (mặc định bật, thuộc máy). Khi lớp phủ đang chạy với một calibration, cứ khoảng hai giây app chụp mẫu vùng phím trên ảnh và so với khung lúc bắt đầu canh: tìm dịch chuyển hay nhất theo ô 3 pixel có bù độ sáng và cắt phần nhiễu (tay chơi, bóng đổ không tính; đổi sáng ±18 % không báo nhầm). Phím trôi quá ngưỡng (~6 pixel ở khung 1280) trong 3 lần đo liền thì dòng trạng thái của thẻ AR nhắc *«Khung phím đã trôi khoảng N pixel — mở Calibrate và đánh dấu lại»* — đúng triết lý «nhắc ngưỡng dùng, không tự sửa»; canh cũng tự tạm nghỉ khi đang đo độ trễ vì hai bên dùng chung cột sọc khung camera. Bảo chứng bởi xUnit `ArDriftMeterTests` (frame tổng hợp: trôi 9 px đo được ±3 px, ổn định/bàn tay/ánh sáng không báo động) cùng block `VerifyArDriftWatch` trong `--verify`.
-- **Một cú bấm, một ánh sáng — và ánh sáng sống động hơn**: trước đây, ở hướng nốt rơi xuống, một lần nhấn phím phát sáng ngay lúc tay chạm phím *rồi lặp lại lần nữa* khi đầu nốt live rơi tới hàng phím — ánh lặp đôi dù tay không nhấn thêm. Nay hiệu ứng cháy đúng một lần theo ngón tay ở cả hai hướng nốt (nốt bài hát trượt qua vẫn lóe nhẹ lúc chạm phím như trước, và chế độ Nghe vẫn có nhịp đánh). Cùng đợt đánh sáng được đánh bóng: flash impact nở vào mượt (~55 ms) và tắt dần êm thay vì lóe/cắt; độ sáng và kích thước ánh sáng đi theo velocity rõ rệt hơn — chạm nhẹ là tàn lửa, đánh mạnh bung rộng (dải nhạc động rộng gấp ~3 lần); phím giữ lâu "thở" nhẹ — tint sáng dao động chậm vài phần trăm sau khoảng một giây, phím mới bấm vẫn sáng tĩnh. Không thêm cài đặt mới: vẻ mới áp ngay cho Live Stage lẫn lớp phủ AR vì cả hai đọc chung một pipeline sáng; bảo chứng bởi bộ kiểm `GpuStageSimulationLightCurvesTests` (xUnit) và ba block khẳng định mới trong `--verify` (một cú bấm = một impact, dải nhạc động velocity + bao đường flash, độ "thở" của tint phím giữ).
-- **Vạch damper: tắt/bật tuỳ ý và màu tuỳ chọn; khung Alignment check chọn được màu**: thẻ **AR PLAYBACK** có thêm toggle **Damper strip** (tắt hẳn vạch sáng mép sau phím khi muốn hình dịu) và mục **Màu vạch damper** — *Theo look (halo)* giữ vạch trong gia đình màu halo của look như trước, *Tự chọn* tô vạch bằng một màu riêng (hữu ích khi màu halo của preset chìm trên nền phím thật); toggle và màu này thuộc look nên đi cùng preset/chia sẻ. Riêng khung **Alignment check** (thẻ KEYBOARD ALIGNMENT) chọn được một trong năm màu tương phản cao — Trắng (mặc định), Xanh lơ, Vàng, Hồng cánh sen, Xanh lá non — để khung luôn nổi trên ảnh camera sáng hay tối; màu khung thuộc máy giống chính chế độ kiểm tra. Cả ba công tắc ăn cho **mọi góc AR** (45°/90°/tự do) vì chung một đường vẽ qua calibration.
-- **Alignment check — phát hiện camera xê dịch bằng một cái nhìn**: toggle mới trong thẻ **KEYBOARD ALIGNMENT** vẽ lại khung phím đã lưu (khung 4 cạnh cùng vạch mờ ở mỗi quãng tám) ngay trên ảnh camera trực tiếp, ở mọi bậc chất lượng, và pack sau cùng nên đọc được trên cả nốt lẫn hiệu ứng. Chân máy bị đụng hay bàn phím bị xê — các vạch không còn khớp phím thật là biết ngay phải calibrate lại. Chế độ này thuộc máy, đi cùng khung nhìn và calibration, nên preset hay mã chia sẻ không bao giờ bật nó trên máy khác; chỉ vẽ khi đã calibrated. Cùng đợt, bảng **độ cao catalogue** được khóa trong `ArElementHeights`: tâm lóe sáng impact nổi đúng 0,2 cm trên phím vừa đánh và xung pulse không bao giờ xuống dưới 0,3 cm — đủ để lóe sáng không lẩn sau mép phím ở góc máy nghiêng, mà mỏng tới mức khung nhìn 90° không thấy khác biệt (dưới mức một pixel, xUnit `ArAlignmentGuidesTests`/`ArElementHeightsTests` khóa hình học, WARP kiểm riêng block alignment).
-- **Vạch damper phát sáng ôm mép sau phím** (catalogue `Dampers`, vẽ từ bậc AR Standard trở lên): một vạch sáng mềm dính liền mép sau của hàng phím — đúng «vạch đánh» sáng rực trong các video đàn quay thẳng từ trên xuống. Vạch luôn mỏng quanh mép; pedal sustain nhấn xuống (mức 0..1, không nhị phân) làm nó vươn sâu ra thân đàn và sáng dậy. Màu lấy **màu halo** của look (cùng gia đình với Pedal Glow trên sân khấu) nên tự hợp với mọi preset, bloom vẽ hào quang quanh lõi nóng, bậc Lite không vẽ — đúng catalogue. Cùng lúc, khung nhìn **90° overhead** (góc quay phổ biến nhất cho hình kiểu này) được `VerifyArNoteProjection` chiếu lại toàn bộ trên WARP — vệt nhấn, tint velocity, vạch damper — để CI khóa góc quay này theo từng build; kiểm xUnit `ArDampersTests` chạy trên mọi máy.
+- **AR render-to-video — the frame half** (roadmap §14.10, AR‑S7 part one): the groundwork for exporting the AR scene to video offline. `Video/ArVideoRenderProfile.cs` (pure) plans geometry/rate/frame count with every safe clamp — even sides the AVI container wants, the 60 fps ceiling of both existing writers, a long-side cap so an over-sharp camera cannot burn GPU for nothing — plus a 1/2/4 downsample choice over 2×2 box averages (`Video/BgraPack.cs`, pure). `Video/ArRenderToVideo.cs` is the offline sweep engine: given a scripted feed per tick, every output frame advances the scene by exactly `1/fps` at a fixed seed — no clock of its own — so two sweeps of one script are **byte-identical**, and any tick matches, pixel for pixel, a live-shaped render of the same tick at the same time step and seed (the roadmap's own "compare live ↔ render" contract). Writes go through the existing `AviVideoRecorder`/`PngSequenceRecorder` at exactly the planned size and rate. Checked by the two pure xUnit suites (`VideoRenderProfileTests`, `BgraPackTests`) and the `VerifyArRenderToVideo` block in `--verify` — the AVI take at 200×112@12 fps reads back with the camera's left stripe and the C4 key light on exactly the pressed ticks, the PNG take boxes 320×180→160×90 across six frames plus manifest. Song audio (mixdown), the GPU-side watermark and the export UI belong to the rest of AR‑S7 and are not in this half.
+- **The look share code goes version 2 — the look travels with its graphs** (roadmap §14.9): COPY CODE now issues a `KEYFLOW-LOOK-2:…` marker, telling the payload carries with the look every AR graph — the note width-by-velocity graph, the note fade-by-velocity graph and the live bar's lifetime fade — so the receiving machine redraws those curves too, not only the palette. APPLY CODE **still reads every version-1 code** (`KEYFLOW-LOOK-1:…`) ever shared, bit for bit, since the JSON envelope was complete from day one; a code from any other version is refused with the matching "made by a different version of Keyflow." reason. The sender's background picture and camera stay home as before. The code transport splits out into `Stage/ShareCodeEnvelope.cs` (pure, settings-free) so xUnit checks it on any machine: the `ShareCodeEnvelopeTests` six facts (version-2 URL-safe issue, version-1 codes opening bit for bit, a reason for every damaged code, chat-wrapped codes still opening, a zip bomb halting at the payload limit). The look/graph level is locked by the extended `VerifyPresetShareCodes` block in `--verify`.
+- **AR performance budget: the overlay drops effect families in a fixed order when the GPU is over budget** (roadmap §14.8): `Camera/ArQualityBudget.cs` plugs into the existing adaptive-quality controller that already watches GPU frame time. As the tier worsens (Full → BloomReduced → BloomMinimal → AmbientReduced → AmbientMinimal), the frame loses exactly one more family down the roadmap's sentence — particles → pulses → note lights → light bars → note style (3D notes flatten to the plain path; the notes themselves stay) → impact glow — and restores them as pressure passes, with zero settings touched. Keys, notes and keypresses are outside the table, so no over-budget frame can ever lose the overlay itself. Locked by the `ArQualityBudgetTests` xUnit suite, the `VerifyArQualityBudget` block and an over-budget WARP rehearsal in `VerifyArNoteProjection` (deep cut: beams/pulses/impact/particles/note lights all gone, key tint and the damper strip intact; back to Full and the lights return untouched).
+- **The AR look now retunes itself per camera view** (roadmap §14.7, Thêm 5): `Camera/ArViewPresets.cs` — a pure table keyed by the view id the machine already knows, not by any new setting. On the leaned cameras (45°, free mark, legacy) the paper-thin heights stay the catalogue's (impact flare 0.2 cm over the key, pulses at least 0.3 cm over the plane) and the stand-up effect quads — hold arcs and light beams — keep drawing; on the **90° overhead** view the lifts shrink to 0.05 cm / 0.1 cm (nothing stands in front of anything on a straight-down camera) and the stand-up quads stay home, because they squash to a noise-thin hairline from directly above. Unknown or empty view ids keep the leaned row, matching how the calibration store normalizes the same ids, and presets/share codes still carry nothing — the view id is machine-local. Locked by the `ArViewPresetTests` xUnit suite and the extended `VerifyArNoteProjection` block in `--verify` (overhead: beams/arcs hidden, impact lights/pulses/particles keep projecting whole on WARP).
+- **Camera tips inside Calibrate, and a live lookout for hands in the picture** (roadmap §14.7, Thêm 4): the calibration window now says the two set-up things nobody remembers first time — *hang the camera over your shoulder, looking down the keys* (a square-overhead view reads every key; a camera across the keys hides the far ones) and *avoid a very wide lens* (ultra-wide bends the key rows toward the edges, and corners marked on bent rows never stay on the real keys) — plus the reminder to mark with hands out of the picture. And the window watches: a classic Y′CbCr skin-lobe lookout samples the still it shows, and when a skin-coloured share fires — anywhere in the picture before the corners are down, only inside the marked keys after — the note line quietly asks for the hands to be moved; it is advice, not a gate, and sunlit beech can still borrow the colour of a hand without harm. Locked by the `CalibrationAdviceTests` xUnit suite and the `VerifyCalibrationAdvice` block in `--verify`.
+- **Calibration backup — export and import the saved alignments of the camera in use** (roadmap §14.7, Thêm 3): two new buttons in the KEYBOARD ALIGNMENT card. **EXPORT CALIBRATION** gathers every saved calibration of the camera (every view, picture size and keyboard size) into one portable `keyflow-ar-calibration` JSON and drops a snapshot PNG of the camera's current frame beside the file, so an old backup tells its camera at a glance (restoring never reads the picture). **IMPORT CALIBRATION** reads such a file, restores every row under the backup's own camera link (or the camera in use when the file names none) and pushes each row through the exact checks a fresh calibration passes — rows that fail are counted and skipped, never drawn, while the wrong kind of file or one written by a newer Keyflow is refused with a plain reason. No new setting: presets and share codes stay free of calibrations, as before. Locked by the `ArCalibrationArchiveTests` xUnit suite and the `VerifyArCalibrationArchive` block in `--verify`.
+- **Automatic drift watch — the overlay notices a moved camera and asks for a re-mark** (roadmap §14.7, Thêm 2): a **Watch for camera drift** toggle in the KEYBOARD ALIGNMENT card (on by default, machine-local). While the overlay draws with a calibration, every couple of seconds the app grids the key area's picture and compares it against the reference sampled when the watch began: the best shift is found on 3-pixel cells with exposure levelling and outlier trimming (playing hands and shadows do not count, and an ±18 % brightness swing never misreports). Once the keys sit past the threshold (~6 px on a 1280 px frame) for three readings in a row, the AR card's status line says *"The keys have drifted about N px from the marked frame — open Calibrate and mark the corners again."* — deliberately a nudge, never a self-edit of the calibration; the watch also parks itself while the camera delay is being measured, since both sides ride the same camera-frame tap. Locked by the `ArDriftMeterTests` xUnit suite (synthetic frames: a 9 px move measures within ±3 px; stills, hands and lighting stay quiet) and by the `VerifyArDriftWatch` block in `--verify`.
+- **One press, one light — and the light itself came alive**: on the downward note direction, a key press used to flash at the fingertip and *then flash again* when the falling head of its live bar reached the key line — a second light with no second press. The effect now fires exactly once, in both note directions, with the finger as its only source (a note you miss still glints softly at touchdown as before, and Listen mode keeps its beat). The lighting itself was polished in the same pass: the impact flash blooms in smoothly (~55 ms) and settles gently instead of popping and clipping; brightness and size follow velocity much more expressively — a soft touch is an ember, a firm hit blooms wide (a ~3× wider dynamic band); and a long-hold key breathes — its tint sways a slow few percent after about a second, while a freshly struck key stays a steady glow. There are no new settings: the new look lands on the Live Stage and the AR overlay alike because both read one shared lighting pipeline; the change is covered by the `GpuStageSimulationLightCurvesTests` xUnit suite and three new assert blocks in `--verify` (one press = one impact family, the velocity dynamic band + flash envelope, and the held-key breath).
+- **Damper strip: an on/off toggle of its own and a custom colour; the alignment frame gets a colour pick**: the **AR PLAYBACK** card gains a **Damper strip** toggle (switch the glowing back-edge line off entirely for a calmer picture) and a **Damper strip colour** choice — *Follow look (halo)* keeps the strip in the look's halo family as before, *Custom* tints it with a colour of its own (useful when a preset's halo washes out over real keys); the toggle and colour belong to the look, so presets and share codes carry them. The **Alignment check** frame (KEYBOARD ALIGNMENT card) separately picks one of five high-contrast colours — White (default), Cyan, Yellow, Magenta, Lime — so the frame stays readable over bright or dim camera pictures; the guide colour is machine-local like the check itself. All three switches apply to **every AR angle** (45°/90°/free), since all views share one drawing path through the calibration.
+- **Alignment check — spot a drifted camera at a glance**: a new toggle in the **KEYBOARD ALIGNMENT** card redraws the saved key area (its four borders plus a faint line at every octave) right over the live camera picture, on every quality tier, packed after everything else so it reads over notes and effects alike. A bumped tripod or a shifted keyboard shows up the moment the lines stop sitting on the real keys — calibrate again and they snap back. The mode belongs to the machine, together with the view profile and its calibration, so presets and share codes never switch it on elsewhere, and it draws only while a calibration exists. In the same pass the catalogue's **height table** is locked in `ArElementHeights`: the impact flare's centre floats exactly 0.2 cm above the struck key and a pulse never comes closer than 0.3 cm to the key plane — enough to keep glints from hiding behind the key fronts on a leaned camera, yet thin enough that the 90° overhead view stays pixel-identical (xUnit `ArAlignmentGuidesTests`/`ArElementHeightsTests` pin the geometry; WARP gets its own alignment block).
+- **A glowing damper strip hugs the back edge of the keys** (the catalogue's `Dampers` element, drawn from the AR Standard tier up): a soft bright line glued to the keys' back edge — the luminous "strike line" of top-down piano videos. The line always skims the edge; pressing the sustain pedal (level 0..1, not a boolean) reaches it out over the fallboard and brightens it. Its colour is the look's **halo colour** (the same family as the stage's Pedal Glow), so it blends with every preset, and bloom builds a halo around its hot core; the Lite tier never draws it, as the catalogue demands. At the same time the **90° overhead** view profile — the most common angle for this filming style — now has `VerifyArNoteProjection` projecting the whole pipeline on WARP once more through a fronto-parallel calibration — live bars, velocity tint, the damper strip — so CI locks that angle down on every build; `ArDampersTests` runs on any machine.
 
 ## 2.0.1 — 2026-10-12
 
 ### AR overlay
 
-- **Vệt nhấn trực tiếp có thể chạy vào phím** (AR‑6.2, phần coverage): trong Cài đặt → Camera live, chevron **THÊM · ĐỘ PHỦ CỦA VỆT TRÊN PHÍM** (chỉ hiện khi bật vệt nhấn) mở ra thanh trượt **Độ phủ của vệt lên phím** (25–300 % chiều sâu phím): 100 giữ vẻ ngoài cũ — vệt dừng đúng mép phím; 200 chạm tới mép trước của phím trắng — **độ phủ toàn bộ** kiểu Keysight; lớn hơn thì tràn qua phím, nhỏ hơn thì vệt tách khỏi phím. Áp dụng được cho cả vệt phẳng lẫn vệt tự do trong không gian 3D (Standard/Ultra) và phần nào nằm ngoài phím vẫn đi theo hướng nốt đã chọn; mặc định 100 nên không ai mất vẻ ngoài quen thuộc. Bảo chứng bởi fact mới trong `ArNotesTests`/`Ar3DNoteProjectionTests` và bởi `--verify` (mở rộng `VerifyArGraphVariable`); thanh trượt thuộc máy, áp giao diện không mang theo.
-- **Vệt nhấn trực tiếp mờ theo vòng đời** (AR‑6.2): trong Cài đặt → Camera live → "Thanh khi nhấn phím", mục mới **Độ mờ vệt nhấn theo vòng đời** với hai thanh trượt **Độ đậm lúc vừa nhấn** và **Độ đậm khi vươn hết tầm** cho vệt nhấn thay đổi độ đậm theo quãng nó đã vươn, thay vì chỉ mờ dần theo chiều dài như cũ. Khi phím còn giữ, độ mờ đi xuôi từ vạch bắt đầu tới vạch kết thúc (60 % → 100 % mặc định — vệt sáng dần khi dài ra); khi nhả phím, độ mờ đi ngược lại suốt pha nhả, và độ mờ pha nhả vốn có vẫn đảm bảo vệt biến mất hẳn. Áp dụng cho cả vệt phẳng lẫn vệt tự do trong không gian 3D (Standard/Ultra); mặc định **tắt**, nên hình ảnh cũ không đổi gì. Bảo chứng bởi `ArLiveFadeTests` cùng các fact mới trong `ArNotesTests`/`Ar3DNoteProjectionTests` và bởi `--verify` (mở rộng `VerifyArGraphVariable`).
-- **Thẻ LIVE KEY RESPONSE nói đúng điều nó làm và giấu đúng hàng**: dòng mô tả đầu thẻ (Cài đặt → Camera live) từng gom chung tint phím, note bay và vệt nhấn thành một câu, rồi nói bừa rằng các núm velocity \"không đổi tint phím\"; nay nó kể rõ ba kênh độc lập — tô màu phím theo vài giây, note bay theo đồ hoạ đã chọn, vệt nhấn riêng — và ghi chú vệt theo tint velocity của look. Hàng **Độ mờ vệt nhấn theo vòng đời** cùng hai thanh trượt của nó nay chỉ hiện khi bật **Thanh khi nhấn phím**, và hai thanh trượt cũng chỉ hiện khi toggle độ mờ đang bật, để không còn điều khiển \"chết\" nào trong dock.
-- **Độ trễ camera ghi nhớ theo từng camera** (AR‑3.5): `Camera delay` từng là một con số cho cả máy, trong khi mỗi camera trễ một lượng riêng (webcam USB ≈ 60–150 ms; camera ảo hay điện thoại làm webcam khác hẳn). Nay độ trễ được lưu theo định danh camera — cùng khoá với file calibration — trong `ar-delay.json` cạnh thư mục cài đặt: rỗi khỏi một camera thì giá trị thanh trượt được ghi lại cho camera đó, mở lại camera thì độ trễ của chính nó tự nạp lại cho cả thanh trượt lẫn engine, và kéo thanh trượt hay chấp nhận kết quả **MEASURE DELAY** đều ghi vào camera đang mở. Giá trị mới được kiểm bởi `ArDelayStoreTests` và `ArDelaySessionTests` trong project test xUnit chạy trên cả Linux lẫn Windows.
+- **Live press bars can now run onto the keys** (AR‑6.2, coverage): under Settings → Live camera a **MORE · LIVE BAR COVERAGE** chevron (shown while bars are on) opens the **Bar coverage on the keys** slider (25–300 % of the keys' depth): 100 keeps the familiar look — the bar stops at the keys; 200 reaches a white key's front edge — Keysight's **full coverage**; beyond spills past the keys, below 100 holds the bar free of them. The flat bars and the 3D route (Standard/Ultra) honor it alike, and whatever part of the bar is not on the keys still follows the selected note direction; the default is 100, so nobody loses the look they already have. Covered by new facts in `ArNotesTests`/`Ar3DNoteProjectionTests` and by `--verify` (extended `VerifyArGraphVariable`); the slider belongs to the machine, so a look does not carry it.
+- **Live press bars can fade over their lifetime** (AR‑6.2): under Settings → Live camera → "Live press bars", a new toggle **Bar fade follows lifetime** with two sliders — **Fade at birth** and **Fade at full length** — makes a live bar change how solid it is by how far it has stretched, instead of only dimming with length as before. While a key is held the fade walks from the first value toward the second (60 % → 100 % by default, so bars brighten as they grow); when the key is released the fade walks backwards across the release, and the familiar release dim still takes the bar away at its end. The effect applies to the flat bars and to the bars flying free in 3D (Standard/Ultra) alike — and it is **off by default**, so nothing about the old look changes. Covered by `ArLiveFadeTests` and new facts in `ArNotesTests`/`Ar3DNoteProjectionTests`, and by `--verify` (extended `VerifyArGraphVariable`).
+- **The LIVE KEY RESPONSE card now says what it actually does, and shows the right rows**: the card's header text (Settings → Live camera) used to bundle key tint, falling notes and press bars into one blanket sentence, then mislabeled the velocity knobs as \"minding the falling notes\"; it now spells out the three independent channels — key tint, falling notes, press bars — and notes that bars follow the look's velocity tint by strike strength. The **Bar fade follows lifetime** row and its two sliders appear only while **Live press bars** is on, and the sliders only while the fade is on too, so the dock has no dead controls left.
+- **The camera delay is now remembered per camera** (AR‑3.5): `Camera delay` used to be one number for the whole machine, while every camera is late by its own amount (a USB webcam ≈ 60–150 ms; a virtual camera or a phone-as-webcam is very different). The delay is now stored under the camera's identity — the same key the calibration file uses — in `ar-delay.json` beside the settings folder: leaving a camera files the slider's value under it, opening one again brings its own delay back to the slider and the engine alike, and dragging the slider or accepting a **MEASURE DELAY** result writes to the camera that is open. The new value is covered by `ArDelayStoreTests` and `ArDelaySessionTests` in the xUnit project that runs on Linux and Windows alike.
 
 ## 2.0.0 — 2026-10-10
 
-### Giao diện & đồ hoạ
+### Interface & graphics
 
-- **Lớp phủ AR (đang phát triển, chưa thử trên webcam thật)**: dùng camera làm nền toàn màn hình, đánh dấu 4 góc dải phím và chọn khung nhìn phù hợp. Calibration nay lưu FOV và pose đàn 3D pitch/yaw/roll; trong Calibrate có gizmo kiểu Unity Move/Rotate/Scale cùng thanh trượt số cho translation và scale đồng đều. Định dạng version 5 lưu đầy đủ pose/FOV/baseline; version 1–4 vẫn đọc với translation 0 và scale 1 (v3/v4 giữ FOV, v1/v2 dùng 70°; v4 giữ góc xoay, v1–v3 dùng 0°). Bật **Notes in perspective** để nốt thành quad camera-facing theo pose; hướng chạy nốt có mũi tên riêng trên preview, nút căn screen-up/theo chiều sâu phím và hai núm **Note direction tilt / azimuth** độc lập với transform bàn phím, đặt ngay sau toggle và trước **Minimum length, share of width**. **Live press bars** là toggle độc lập, mặc định tắt, không tắt key tint; vệt nốt phẳng của sân khấu bị suppress trên camera cả khi chưa calibrate. Ambient như cánh hoa và sao băng tiếp tục vẽ phẳng screen-space, không bị chiếu phối cảnh. Learn / Perform, nhìn trước, opacity và key tint vẫn có; Quality chọn Lite / Standard / Ultra. AR camera-facing quads gọi chung `ShadeNoteMaterial` cho các style đã biết; WARP regression mới sample sáu style trên calibrated quads và Gem/Crystal trên flat AR path, đang chờ Windows CI xác nhận. Không tuyên bố full setting/value parity; camera thật vẫn **Unverified** cho tới khi thử webcam. Camera delay (0–300 ms) bù độ trễ; `--bench-ar` đo phần việc của app. Sandbox thiếu .NET SDK nên chưa build/test tại chỗ; ambient vẫn phẳng trên camera, ghi lựa chọn ambient vào mô tả PR khi thử hardware.
-- **Danh sách camera trên máy**: mỗi camera một dòng bằng tên thật (không bao giờ "Camera 1"), loại, cổng, mã VID/PID; Automatic ưu tiên camera màu, xếp camera ảo sau và camera hồng ngoại (Windows Hello) cuối. Cắm/rút camera, hay bật/tắt OBS Virtual Camera, tự cập nhật danh sách và mở lại camera khi cần; việc đó nằm yên khi đang ghi, đang đo độ trễ hoặc đang đánh dấu phím. Camera là của máy: áp preset hay dán mã chia sẻ không đổi camera đã chọn.
-- Sửa hai lỗi đọc camera thật: khoá Media Foundation sai nên mọi camera YUY2/MJPG báo `0xC00D5212`, và reader tạo/đọc khác luồng gây `E_NOINTERFACE`; mỗi lần quét danh sách camera không còn để lọt một tham chiếu COM.
-- Camera trực tiếp: app chọn chế độ gần 720p nhất ở tốc độ cao nhất camera có (tối đa 60 fps), đọc theo nhịp camera thay vì trần 30 fps, và hiện chế độ thật (`720p · 60 fps · MJPG`) ở dòng trạng thái. Khung hình đi qua bộ đệm 3 ô, không còn bị xé khi vẽ chậm.
-- Bàn phím **88/76/61/49 phím**: chọn cỡ ở Settings → Keyboard; sân khấu, nốt rơi, phím sáng và động cơ GPU đều vẽ đúng cỡ đã chọn, nốt ngoài tầm phím không được vẽ. Preset không đổi cỡ đàn. Trang đó còn gợi ý cỡ vừa với các nốt đã chơi trên đàn thật.
-- Khôi phục trang chủ hoà nhạc, ba giao diện có sẵn, nhãn đã dịch và các nút icon từ `arena/01a107ec-pianopath` khi giải quyết xung đột hợp nhất với `main`.
-- Giữ artwork **Keyflow Visualizer Piano** và icon EXE Windows/bộ cài từ `main`. Mã nguồn và tài nguyên nhúng của shader Cosmic Nocturne vẫn được giữ nhưng không bật trên trang chủ đã khôi phục; bố cục và dấu hiệu thương hiệu trong app theo bản hoà nhạc.
+- **AR overlay (in development, not yet tried on a real webcam)**: use the camera as a full-screen background, mark the four key-strip corners and choose the matching camera view. Calibration saves FOV and a full 3D keyboard pose; Calibrate now has a Unity-style Move/Rotate/Scale gizmo plus numeric translation and uniform-scale sliders. Version 5 stores the complete transform, FOV and baseline; versions 1–4 still load with zero translation and unit scale (v3/v4 keep saved FOV, v1/v2 use 70°; v4 keeps rotation, v1–v3 use 0°). Enable **Notes in perspective** to render camera-facing note quads from that pose; note travel has its own preview arrow, Screen-up/key-depth aiming buttons and independent **Note direction tilt / azimuth** controls, without changing the keyboard transform. The settings controls stay directly after the toggle and before **Minimum length, share of width**. **Live press bars** are an independent, off-by-default toggle and do not disable key tint; flat stage-space falling trails are suppressed over the camera even before calibration. Ambient layers such as petals and shooting stars remain flat screen-space and are not perspective-projected. Learn / Perform, look-ahead, opacity and key tint remain available; Quality selects Lite / Standard / Ultra. AR camera-facing quads route known styles through the shared `ShadeNoteMaterial`; new WARP checks sample all six styles on calibrated quads and Gem/Crystal on the flat AR path, pending Windows CI. Full setting/value parity is not claimed, and real-camera validation remains **Unverified** until a webcam trial. Camera delay (0–300 ms) compensates for capture latency; `--bench-ar` measures the app's own share of the work. The sandbox has no .NET SDK for local build/tests; ambient stays flat on the camera, and the ambient choice should be recorded in the PR description for hardware testing.
+- **Cameras on this machine**: one line per camera by its real name (never "Camera 1"), kind, port and VID/PID; Automatic prefers colour cameras, ranks virtual ones after them and infrared (Windows Hello) cameras last. Plugging a camera in or out, or starting/stopping OBS Virtual Camera, updates the list and reopens the camera when it has to; this stays still while a take is recorded, the delay is measured or the keys are marked. The camera is the machine's: applying a preset or pasting a share code does not change the camera you picked.
+- Fixed two faults reading a real camera: a wrong Media Foundation key made every YUY2/MJPG camera report `0xC00D5212`, and a reader created on one thread and read on another gave `E_NOINTERFACE`; each reading of the camera list no longer leaks a COM reference.
+- Live camera: the app picks the mode nearest 720p at the highest rate the camera has (up to 60 fps), reads at the camera's own pace instead of a fixed 30 fps cap, and shows the real mode (`720p · 60 fps · MJPG`) in the status line. Frames travel through a three-buffer ring, so a slow draw can no longer tear a picture.
+- **88/76/61/49-key keyboards**: pick the size in Settings → Keyboard. The stage, falling notes, lit keys and the GPU engine all draw the chosen size, and song notes outside its range are not drawn. Presets leave the keyboard size alone. The page also suggests the size that fits the notes played on the real instrument.
+- Restored the concert-grand home screen, its three built-in themes, localized labels and icon-button UI from `arena/01a107ec-pianopath` when resolving the merge with `main`.
+- Kept the supplied **Keyflow Visualizer Piano** artwork and the Windows executable/installer icons from `main`. The Cosmic Nocturne shader source and embedded resource are retained but are not enabled on the restored home screen; the in-app layout and branding follow the concert-grand version.
 
-### Âm thanh & trải nghiệm thiết lập
+### Audio & setup experience
 
-- Thay toàn bộ nhạc cụ SF2 đóng gói và engine SF2 bằng **Salamander Grand Piano V3 duy nhất**, phát qua SFZ; bỏ chức năng nhập SF2 và chọn nhạc cụ ngoài.
-- Salamander không còn nằm trong Git, ZIP hoặc installer: người dùng chủ động tải một lần khoảng **748 MB** từ trang Audio. Downloader ghim commit, xác minh Git blob SHA-1 từng mẫu FLAC, hỗ trợ huỷ/tiếp tục và ghi mapping/attribution sau khi xác minh xong.
-- Menu khởi động tách **Piano & Audio Setup** và **MIDI Devices** để vào đúng trang cài đặt nhanh hơn; trang Audio có trạng thái rõ ràng, tiến độ tải, nạp/kiểm tra lại đàn và lựa chọn đầu ra.
-- Thêm công tắc **Tiếng đàn** ở Quick Adjust và Audio. Tắt tiếng chỉ ngắt đầu ra âm thanh của ứng dụng; hình ảnh, MIDI ra và âm thanh ghi vào bản thu vẫn giữ nguyên. Tuỳ chọn được lưu trên máy và preset không ghi đè.
-- Cập nhật README, hướng dẫn phát hành, kiểm tra nguồn và trang phát hành công khai theo mô hình tải đàn riêng; bỏ hướng dẫn Git LFS, thư mục `Assets/` và kích thước SF2 cũ.
+- Replaced the bundled SF2 piano and SF2 engine with **Salamander Grand Piano V3 as the sole instrument**, rendered through SFZ; removed SF2 import and external instrument selection.
+- Salamander is no longer stored in Git or bundled in ZIPs/installers. Users explicitly download the one-time library (about **748 MB**) from Audio settings. The downloader pins a commit, verifies every FLAC against its Git blob SHA-1, supports cancel/resume, and writes the SFZ mapping and attribution only after all samples verify.
+- Split the startup menu into **Piano & Audio Setup** and **MIDI Devices** shortcuts; Audio settings now show clearer status, download progress, piano load/repair actions and output selection.
+- Added a **Piano sound** switch to Quick Adjust and Audio settings. Muting stops only this app's audio output; visuals, outgoing MIDI and audio recorded into a take remain unchanged. The preference is saved locally and presets do not override it.
+- Updated the READMEs, release instructions, source checks and generated public release page for the separate piano download; removed obsolete Git LFS, `Assets/` and old SF2-size guidance.
 
-### Giao diện & hộp thoại
+### Interface & dialogs
 
-- Nút icon thay cho hàng chữ hoa toàn bộ trong dock cài đặt: hàng nút preset (lưu, xoá, nhập, xuất, đặt lại), hàng mã chia sẻ (sao chép), trang History (xuất HTML, xoá lịch sử), các thao tác tệp Nền/Camera/Hồ sơ và tạo/sửa/xoá theme giờ là nút icon kèm tooltip đã dịch. Hành động chính vẫn giữ nhãn (“Áp dụng preset”, “Áp mã”, “Lưu”).
-- Nút **SETTINGS** trên header thành nút bánh răng icon; nhãn “Change” của chip LOOK thành icon gọn; năm liên kết của menu khởi động (đàn & âm thanh, MIDI, phím tắt, giới thiệu, thoát) có icon tương ứng.
-- Bỏ ký tự Unicode trong nhãn nút (⬇, ⟳, ●, ↺, ×) — chúng không theo màu theme và render không nhất quán; tải đàn, làm mới thiết bị, ghi hình, xoá vòng lặp và reset từng slider dùng bộ icon riêng của app.
-- Nhãn nút phụ thống nhất về chữ thường có hoa đầu; mọi nút chỉ có icon giữ tooltip — đồng thời là tên đọc cho trình đọc màn hình.
-- Công tắc lớp trong Quick Adjust co theo độ dài nhãn thay vì giữ mỗi mục rộng 150 px, đưa nút gạt sát chữ hơn.
+- Icon buttons replace the wall of all-caps labels in the settings dock: the preset toolbar (save as, delete, import, export, reset), the share-code row (copy), the History page (export HTML, clear), the Background/Camera/Profile file actions and theme create/edit/delete are now glyph tiles with localized tooltips. Primary actions keep their labels (“Apply preset”, “Apply code”, “Save”).
+- The header’s **SETTINGS** label becomes a gear icon button and the LOOK chip’s “Change” label becomes a compact icon; the startup menu’s five links (Piano & Audio, MIDI, shortcuts, about, exit) gain matching icons.
+- Unicode glyphs (⬇, ⟳, ●, ↺, ×) are gone from button labels — they never followed the theme and rendered inconsistently; the piano download, device refresh, recording, loop clear and per-slider resets now use the app’s own icon set.
+- Secondary action labels are unified to sentence case; every icon-only button keeps its tooltip, which is also the accessible name screen readers announce.
+- Quick Adjust stage switches now size to their captions instead of reserving 150-pixel items, keeping each switch close to its label.
 
-### Đóng gói & phát hành
+### Packaging & release
 
-- **Gói chưa được ký mã số**: SignPath Foundation từ chối đơn đăng ký mã nguồn mở, nên bản 2.0.0 phát hành các gói **chưa ký** (`PianoPath.exe` ×3 và `Keyflow-Setup-*.exe`). Windows SmartScreen có thể hiện bảng *"Windows protected your PC"* khi cài đặt hay chạy lần đầu: bấm *More info → Run anyway*, rồi đối chiếu tệp với `SHA256SUMS.txt`. `release.yml` không còn bước ký; hướng ký về sau nằm ở `docs/CODE-SIGNING.md`.
-- Ba gói ZIP được đóng sau khi bộ cài đã biên dịch xong; tên tệp và `SHA256SUMS.txt` giữ nguyên dạng cũ.
+- **Packages are not code-signed yet**: SignPath Foundation declined the open-source application, so 2.0.0 ships the three `PianoPath.exe` builds and the `Keyflow-Setup-*.exe` installer **unsigned**. Windows SmartScreen may show *"Windows protected your PC"* on install or first run: choose *More info → Run anyway*, then check the files against `SHA256SUMS.txt`. `release.yml` has no signing step any more; the plan for signing later is in `docs/CODE-SIGNING.md`.
+- The three ZIP packages are now packed **after** signing (they used to be packed right after publish); file names and `SHA256SUMS.txt` keep their old shape.
 
 ## 1.0.0 — 2026-10-03
 
-Bản phát hành chính thức đầu tiên. Keyflow là ứng dụng desktop Windows (C# · WPF · .NET 10) để **chơi đàn,
-luyện tập và làm video piano theo MIDI** với chất lượng trình diễn hoà nhạc, giao diện **hai ngôn ngữ
-English và Tiếng Việt** đổi ngay trong lúc chạy. Toàn bộ phạm vi v0.5–v0.8 của `docs/ROADMAP.md` đã vào;
-mục này mô tả sản phẩm ở trạng thái phát hành thay vì liệt kê từng commit (trước 1.0.0 repo chưa cắt bản
-phát hành nào, nên lịch sử chi tiết nằm trong log commit và các pull request).
+The first official release. Keyflow is a Windows desktop application (C# · WPF · .NET 10) to **play, practise
+and make piano videos from MIDI** at concert-performance quality, with an interface in **English and Tiếng
+Việt** that switches while the application runs. The whole v0.5–v0.8 scope of `docs/ROADMAP.md` has landed;
+this entry describes the product as released rather than listing every commit (no release was cut before
+1.0.0, so the detailed history is the commit log and the pull requests).
 
-### Sân khấu & đồ hoạ
+### Stage & graphics
 
-- **Engine GPU Direct3D 11** (Vortice) vẽ sân khấu trên luồng riêng: HDR 16-bit, bloom nhiều tầng, mục
-  tiêu khung 60/120/144/240 FPS hoặc không giới hạn, và không bao giờ chặn đầu vào MIDI. Shader HLSL nhúng
-  trong assembly và được biên dịch lúc khởi động bằng `d3dcompiler_47.dll` có sẵn trong Windows.
-- Đổ bóng bàn phím 88 phím theo mô hình Unreal: Cook-Torrance GGX + softbox + tonemap filmic ACES; tia lửa
-  nóng sáng nguội dần theo bức xạ nhiệt, sóng cộng hưởng âm học, lửa tại điểm phím gõ, bụi acoustic, cánh
-  hoa, đèn sân khấu — mỗi lớp bật/tắt riêng.
-- **Bộ dựng hình WPF** (shader CPU đa luồng) là đường dự phòng khi Direct3D không khởi động được, và là
-  đường vẽ của bản ghi PNG trong suốt; trang General nói rõ engine nào đang chạy và vì sao.
-- **14 preset có sẵn** và **3 preset cộng đồng** nhúng trong assembly (`presets/*.json`); preset người dùng
-  giữ ảnh thu nhỏ do chính sân khấu render; **mã chia sẻ diện mạo** `KEYFLOW-LOOK-1:…` (JSON nén gzip trong
-  base64url) gửi một look sang máy khác, bỏ đường dẫn ảnh nền và `Clamp()` lại khi giải mã.
-- Ba theme giao diện (Concert Grand, Concert Noir, Velvet Gold) cộng **xưởng theme** của người dùng: năm
-  màu gốc suy ra hai mươi token, lưu trong `<cài đặt>/themes/*.json`; high contrast của Windows được nhận
-  diện và vẽ lại ngay khi hệ thống đổi.
+- A **Direct3D 11 GPU engine** (Vortice) draws the stage on its own thread: 16-bit HDR, multi-layer bloom, a
+  frame target of 60/120/144/240 FPS or unlimited, and it never blocks MIDI input. The HLSL shaders are
+  embedded in the assembly and compiled at start-up with the `d3dcompiler_47.dll` Windows already ships.
+- 88-key keyboard shading after the Unreal model: Cook-Torrance GGX + softbox + ACES filmic tone mapping;
+  sparks that cool by thermal radiation, acoustic resonance waves, fire at the strike point, acoustic dust,
+  petals and stage lights — each layer switchable on its own.
+- The **WPF renderer** (multi-threaded CPU shaders) is the fallback when Direct3D will not start, and the
+  path the transparent PNG recording draws on; the General page says which engine is running and why.
+- **14 built-in presets** and **3 community presets** embedded in the assembly (`presets/*.json`); user
+  presets keep a thumbnail the stage rendered itself; a **look-sharing code** `KEYFLOW-LOOK-1:…` (gzip JSON in
+  base64url) carries a look to another machine, drops the background-image path and re-`Clamp()`s on decode.
+- Three interface themes (Concert Grand, Concert Noir, Velvet Gold) plus a user **theme studio**: five base
+  colours derive twenty tokens, stored in `<settings>/themes/*.json`; Windows high contrast is detected and
+  repainted the moment the system changes.
 
-### Âm thanh
+### Audio
 
-- Synthesizer **SoundFont 2** viết tay, không thêm dependency: preset/zone/sample, ngữ nghĩa generator
-  (instrument ghi đè, preset cộng dồn), loop, giai đoạn release, giới hạn đa âm, sustain/sostenuto/soft.
-- SoundFont đi kèm: **YDP Grand Piano** của FreePats (đa mẫu Yamaha Disklavier Pro), giấy phép **CC BY 3.0**,
-  ~113 MiB qua Git LFS; `Assets/ATTRIBUTION.txt` ghi công và nằm trong mọi gói phân phối.
-- Đầu ra `waveOut`; máy không mở được thiết bị âm thanh vẫn chạy đầy đủ và báo đúng lý do.
+- A hand-written **SoundFont 2** synthesizer with no extra dependency: presets/zones/samples, generator
+  semantics (instrument overrides, preset accumulation), loops, the release stage, a polyphony limit and
+  sustain/sostenuto/soft.
+- The bundled SoundFont: FreePats' **YDP Grand Piano** (Yamaha Disklavier Pro multisamples), licensed
+  **CC BY 3.0**, ~113 MiB through Git LFS; `Assets/ATTRIBUTION.txt` carries the credit and ships in every
+  package.
+- `waveOut` output; a machine that cannot open an audio device still runs everything else and says exactly
+  why.
 
-### Nhập bài & khuông nhạc
+### Import & sheet music
 
-- **MIDI** định dạng 0/1/2, cả hai kiểu độ chia (PPQ lẫn SMPTE), tempo map, kênh percussion, tên track,
-  lưới phách theo ô nhịp (`Meter.Of`: 4/4, 3/4, 2/2, 3/8 đập theo đơn vị đã ghi; 6/8, 9/8, 12/8 đập theo
-  nhóm ba; 7/8 vẫn bảy), từ chối tệp hỏng.
-- **MusicXML** `.musicxml`/`.xml`/`.mxl` (nén đọc qua `META-INF/container.xml`), giữ con trỏ theo
-  `divisions` trong từng part/measure, `backup`/`forward`, đổi tempo giữa bài, hợp âm dùng chung điểm vào,
-  điểm chia tay đọc từ `<staff>`.
-- **Lớp khuông nhạc** vẽ trên sân khấu: tự suy ra hoá biểu của bài (tương quan Krumhansl–Kessler), viết dấu
-  hoá theo từng ô nhịp, nối đuôi nốt ngắn theo phách, viết dấu nghỉ cho tay đang im lặng, nối dấu luyến cho
-  nốt vắt qua vạch nhịp, ghép hợp âm thành một cột chung đuôi, nối đường cong khi dòng nhạc đổi tay, và
-  dòng kẻ phụ chỉ khi nốt ra ngoài khuông.
-- **Suy luận điểm chia hai tay** từ chính bài: gom hai cụm theo thời lượng vang, chỉ nhận khi giữa hai tay
-  có ≥5 semitone trống và mỗi tay chiếm ≥10%, ưu tiên nốt giữa C4; bài một tay hoặc chồng lấn thì giữ lựa
-  chọn của người dùng, và kết quả được nhớ theo từng bài.
+- **MIDI** format 0/1/2, both time-division kinds (PPQ and SMPTE), tempo maps, the percussion channel, track
+  names, a beat grid grouped per measure (`Meter.Of`: 4/4, 3/4, 2/2, 3/8 count the written unit; 6/8, 9/8,
+  12/8 count groups of three; 7/8 still counts seven), and corrupt files are refused.
+- **MusicXML** `.musicxml`/`.xml`/`.mxl` (compressed read through `META-INF/container.xml`), a cursor kept per
+  part/measure against `divisions`, `backup`/`forward`, tempo changes mid-piece, chords sharing one onset, and
+  a hand-split point read from `<staff>`.
+- A **sheet-music layer** drawn on the stage: the piece's key signature inferred (Krumhansl–Kessler
+  correlation), accidentals spelled per measure, short notes beamed to the beat, rests written for the silent
+  hand, ties across a barline, chords merged into one stemmed column, a slur where the line changes hands,
+  and ledger lines only when a note leaves the staff.
+- **Hand-split inference** from the piece itself: two clusters by sounding duration, accepted only with ≥5
+  semitones of gap between the hands and ≥10% of the duration each, preferring the note nearest C4; a
+  one-handed or overlapping piece keeps the user's choice, and the result is remembered per song.
 
-### Luyện tập
+### Practice
 
-- Chấm điểm theo nốt (đúng/sai, độ chính xác, chuỗi dài nhất) và **giữ từng nốt đã chấm điểm** của lượt
-  chơi (tối đa 256 nốt) để vẽ **bóng (ghost)**: lượt tốt nhất ở trên, lượt mới nhất ở dưới.
-- **Biểu đồ 14 ngày** theo ngày địa phương (ngày không luyện vẫn là một hàng 0), trong dock và trong báo
-  cáo HTML.
-- **Tempo luyện tập tự động**: sai liên tiếp quá ngưỡng (1–6, mặc định 3) thì mỗi bước giảm 5% tới sàn
-  50%, đúng 4 nốt liên tiếp thì tăng 2% và dừng ở 100% — mỗi bước đi qua chính slider tempo.
-- **Lịch sử luyện tập** append mỗi lượt một dòng JSON vào `history/practice.jsonl` (giữ 200 lượt gần nhất,
-  bỏ qua dòng hỏng), trang **History** in các lượt gần nhất và lượt tốt nhất của bài đang mở, kèm
-  **EXPORT HTML** và **CLEAR HISTORY**.
+- Note-by-note scoring (hits/misses, accuracy, longest streak) that **keeps every graded note** of a run (up
+  to 256) so the dock can draw a **ghost**: the best run above, the latest below.
+- A **14-day chart** grouped by local day (a day without practice is still a zero row), in the dock and in the
+  HTML report.
+- **Automatic practice tempo**: more misses in a row than the threshold (1–6, default 3) steps down 5% to a
+  floor of 50%, four correct notes in a row step up 2% and stop at 100% — every step goes through the tempo
+  slider itself.
+- **Practice history** appends one JSON line per run to `history/practice.jsonl` (the latest 200 runs, corrupt
+  lines skipped); the **History** page prints the recent runs and the best run of the open song, with
+  **EXPORT HTML** and **CLEAR HISTORY**.
 
-### Ghi hình
+### Recording
 
-- **MP4 (H.264 + AAC)** ghi trực tiếp bằng Media Foundation sink writer sẵn có trong Windows, tiếng nằm
-  trong tệp: khung BGRA của sân khấu đổi sang NV12, bitrate theo kích thước × fps, PCM của engine âm thanh
-  mã hoá AAC qua cùng giao kèo `IAudioTrack`.
-- **AVI** (MJPEG, hoặc RGB không nén khi máy thiếu codec; trần 2 GB) với tiếng ở **WAV** stereo 16-bit cạnh
-  đó, kèm dòng lệnh ffmpeg để ghép.
-- **Chuỗi PNG 32-bit có alpha** cho hậu kỳ nền trong, kèm `sequence.json` và lệnh ffmpeg `libvpx-vp9` +
-  `yuva420p` dựng thành WebM alpha.
-- Việc mã hoá chạy trong **tiến trình con** (`--encode-take`) với phép thử codec trước khi ghi và phép thử
-  đường ống khi lượt ghi không ra tệp, nên codec làm sập tiến trình thì kết luận vẫn còn; cửa sổ mở bộ ghi
-  được bọc `HangGuard` hạn 10 giây rồi **tự lùi về AVI** kèm câu báo trên máy có media stack treo.
-- **Lớp phủ camera** (camera trực tiếp hoặc tệp video chạy lặp, đặt theo bốn góc, mirror, opacity, key màu
-  xanh lá) và **theo dõi bàn tay** bằng thị giác cổ điển: luật màu da YCbCr có độ nhạy chỉnh được, lưới
-  32×24, đếm ngón theo biên dạng cột, vẽ dải sáng trên phím bàn tay đang ở.
-- **Hết đơ và hết tệp hỏng khi ghi** — ba bản vá sau lượt cắt đầu tiên: mỗi khung và mỗi khối âm thanh trả
-  lại bộ đệm COM của Media Foundation ngay trong `finally` (trước đây chúng bị giữ tới lúc GC, RAM phình lên
-  rồi cả cửa sổ đứng khi chúng được giải phóng cùng lúc); khung hình và âm thanh đi qua một hàng đợi có
-  biên tới luồng công nhân làm phần chuyển NV12 và ghi tệp, khung mà bộ mã hoá theo không kịp được gộp vào
-  khung mới nhất thành khung lặp nên tệp vẫn giữ đúng thời gian thực; cả lượt ghi MP4 nằm trên **một luồng
-  duy nhất** (Media Foundation từ chối sink writer tạo ở luồng này rồi gọi ở luồng khác — đó là lý do những
-  lượt ghi trước ra tệp rỗng hoặc thiếu index) và lỗi lúc đóng tệp được báo ra thay vì bỏ qua; AVI cũng ghi
-  trên luồng riêng, khung lặp ghi bằng null frame thay vì nén lại, và lượt ghi bị chặn ở **1080p** theo cả
-  hai chiều.
-- **MP4 nay là định dạng mặc định**, và tệp nó ghi ra mở được ở mọi trình phát: `MF_MT_FRAME_SIZE` xếp
-  chiều rộng vào word cao nhưng bộ ghi lại truyền chiều cao trước, nên bộ mã hoá đọc mọi khung với stride
-  sai và một lượt 1920×1080 bị khai thành 1080×1920 — hình ra thành nhiễu ngang. Kích thước nay được khai
-  đúng `rộng × cao`, `--soak-record` so kích thước tệp tự khai với kích thước đã yêu cầu, và hồ sơ mới mặc
-  định ghi MP4 thay vì AVI (AVI không có codec MJPEG là khung thô, đầy trần 2 GB trong vài giây ở 1080p).
+- **MP4 (H.264 + AAC)** written directly by the Media Foundation sink writer Windows already ships, with the
+  audio inside the file: the stage's BGRA frames converted to NV12, a bitrate from size × fps, and the audio
+  engine's PCM encoded to AAC through the shared `IAudioTrack` contract.
+- **AVI** (MJPEG, or uncompressed RGB when the machine has no codec; 2 GB ceiling) with the audio in a
+  16-bit stereo **WAV** beside it, plus the ffmpeg command line to mux the two.
+- A **32-bit PNG sequence with alpha** for transparent-background post work, with `sequence.json` and the
+  `libvpx-vp9` + `yuva420p` ffmpeg line that rebuilds it into an alpha WebM.
+- Encoding runs in a **child process** (`--encode-take`) with a codec probe before the take and a plumbing
+  probe when the take produced no file, so a codec that takes the process down still leaves the verdict; the
+  recorder's open window is wrapped in a 10-second `HangGuard` and **falls back to AVI** with a message on a
+  machine whose media stack hangs.
+- A **camera overlay** (a live camera or a looping video file, placed by corner, mirrored, opacity, green
+  key) and **hand tracking** with classical vision: a YCbCr skin-colour rule with its own sensitivity, a
+  32×24 grid, a finger count from the column profile, and a lit band on the key the hand is over.
+- **No more freezes and no more broken files when recording** — three fixes after the first cut: every frame
+  and audio block releases its Media Foundation COM buffer in a `finally` (they used to wait for the GC, so
+  memory ballooned and the window froze when they were all freed at once); frames and audio go through a
+  bounded queue to a worker thread that does the NV12 conversion and the encoder write, and frames the
+  encoder falls behind on are folded into the newest one as repeats so the file keeps real time; a whole MP4
+  take lives on **one thread** (Media Foundation refuses a sink writer created on one thread and called from
+  another, which is why earlier takes came out empty or without an index) and a failed close is reported
+  instead of ignored; AVI is written off the UI thread too, repeats are written as zero-byte null frames
+  rather than re-compressed duplicates, and a take is capped at **1080p** in both directions.
+- **MP4 is now the default format**, and the file it writes opens in every player: `MF_MT_FRAME_SIZE` packs
+  the width into the high word, but the recorder passed the height first, so the encoder read every frame
+  with the wrong stride and a 1920×1080 take was declared 1080×1920 — horizontal static on screen. The size
+  is now declared as width × height, `--soak-record` compares the size the file declares with the size that
+  was asked for, and new profiles default to MP4 instead of AVI (an AVI without an MJPEG codec is raw
+  frames, which fills the 2 GB limit in seconds at 1080p).
 
-### Thư viện, hồ sơ & bàn thiết kế
+### Library, profile & design desk
 
-- Hộp thoại Play có **RECENT** (12 bài gần nhất kèm số nốt, số track, tempo, điểm chia tay, tốc độ rơi,
-  tempo phát và preset — mở lại là khôi phục qua đúng các slider) và **LIBRARY** theo thư mục (quét BFS
-  tối đa 3 tầng/500 tệp bằng chính reader của app, cache theo kích thước + giờ sửa trong
-  `library-index.json`, thẻ theo từng bài, tìm kiếm khớp tiêu đề–tên tệp–thẻ, và theo dõi thư mục nên danh
-  sách tự cập nhật).
-- **Hồ sơ cài đặt** `Keyflow.profile.json` gom cài đặt sân khấu + ngôn ngữ + theme, nhập/xuất ở trang
-  General; kéo-thả `.json` (hồ sơ), `.mid`/`.midi` (mở bài) và ảnh (đặt nền) vào cửa sổ.
-- **Undo/redo 32 bước** cho bàn thiết kế (`Ctrl+Z` / `Ctrl+Shift+Z` / `Ctrl+Y`), một lần kéo slider là một
-  bước vì ảnh chụp được commit ở nhịp idle của bộ tự lưu.
-- **Tìm kiếm trong dock** có từ đồng nghĩa theo từng setting, khớp theo token (giao), tên setting là lưới
-  an toàn cuối, và phần khớp được tô màu accent.
+- The Play dialog holds **RECENT** (the 12 latest songs with note count, track count, tempo, hand split, fall
+  speed, playback tempo and preset — reopening restores all of them through the very sliders) and a
+  folder-based **LIBRARY** (a bounded BFS of 3 levels/500 files read by the app's own readers, cached by size
+  + modification time in `library-index.json`, per-song tags, search over title–file name–tags, and a folder
+  watcher so the list follows the disk).
+- A **settings profile** `Keyflow.profile.json` gathering the stage settings + language + theme, imported and
+  exported on the General page; drag-and-drop of `.json` (a profile), `.mid`/`.midi` (open a song) and images
+  (set the background) onto the window.
+- **Undo/redo of 32 steps** on the design desk (`Ctrl+Z` / `Ctrl+Shift+Z` / `Ctrl+Y`); one slider drag is one
+  step because the snapshot is committed on the auto-save timer's idle tick.
+- **Dock search** with per-setting synonyms, token intersection, the setting name as the last safety net, and
+  the matched part painted in the accent colour.
 
-### Giao diện, đa ngôn ngữ & trợ năng
+### Interface, languages & accessibility
 
-- Dock **13 trang chia 4 nhóm** (STAGE DESIGN, SOUND & INPUT, SESSION, APP); catalogue trang nằm ở
-  `Ui/SettingsPages.cs` và được đối chiếu với dải tab trong XAML cả lúc tĩnh lẫn lúc chạy.
-- **Song ngữ**: 1.266 khoá chuỗi, bảng tiếng Việt đầy đủ, đổi ngôn ngữ trên cửa sổ đang mở và mọi nhãn vẽ
-  lại ngay; id ngôn ngữ/theme/preset luôn ở dạng tiếng Anh trong tệp lưu nên đổi ngôn ngữ không đổi dữ
-  liệu trên đĩa.
-- **Trợ năng**: `AutomationProperties.Name` cho mọi nút chỉ có glyph và mọi hàng sinh tự động, Tab đi vòng
-  trong dock theo đúng thứ tự các hàng, palette `SystemColors` khi Windows bật high contrast, và ở cửa sổ
-  1080×700 mọi trang vẫn giữ điều khiển trong khung dù một từ ở ngôn ngữ khác dài hơn.
-- Thẻ phím tắt (F1), Escape ưu tiên lớp đang thấy, menu khởi động có chọn ngôn ngữ và xem nhanh diện mạo
-  sân khấu.
+- A dock of **13 pages in 4 groups** (STAGE DESIGN, SOUND & INPUT, SESSION, APP); the page catalogue lives in
+  `Ui/SettingsPages.cs` and is compared against the XAML tab strip both statically and at run time.
+- **Two languages**: 1,266 string keys, a complete Vietnamese table, switching on an open window with every
+  label repainted at once; language/theme/preset ids stay English in the saved files, so switching language
+  can never change what is on disk.
+- **Accessibility**: `AutomationProperties.Name` on every glyph-only button and every generated row, Tab
+  cycling inside the dock in the order the rows are printed, the `SystemColors` palette when Windows turns on
+  high contrast, and at 1080×700 every page keeps its controls inside their card even when a word is longer
+  in the other language.
+- The shortcut card (F1), Escape leaving the topmost layer first, and a start-up menu with the language picker
+  and a read-out of the current stage look.
 
-### Đóng gói & phân phối
+### Packaging & distribution
 
-- **`publish.ps1`**: một lệnh ra bản single-file **self-contained** (ReadyToRun) hoặc
-  **framework-dependent**, cho `win-x64` hoặc `win-arm64`, kèm `-Zip`; script từ chối publish khi
-  `Assets\ConcertGrand.sf2` còn là con trỏ Git LFS (bản build sẽ chạy mà không có tiếng đàn).
-- **Bộ cài Inno Setup** song ngữ (`installer\Keyflow.iss` + bản dịch một phần 108 câu trong
-  `installer\Languages\Vietnamese.isl`): tự chọn ngôn ngữ theo Windows, tạo shortcut Start Menu/Desktop và
-  mục gỡ cài đặt; `tools/build_installer.ps1` biến mọi cảnh báo lạ của ISCC thành lỗi.
-- **`release.yml`**: đẩy tag `v*` là có GitHub Release kèm **ba ZIP** (self-contained `win-x64`,
-  framework-dependent `win-x64`, self-contained `win-arm64`), **bộ cài `.exe` `win-x64`** dựng từ chính thư
-  mục vừa publish, và **`SHA256SUMS.txt`** của từng tệp để người tải tự kiểm gói (các gói chưa ký số).
-  Bản publish được smoke test bằng `--verify` trước khi đính kèm.
-- **`LICENSE.txt` (MIT) và `Assets/ATTRIBUTION.txt` (CC BY 3.0 của SoundFont) nằm trong mỗi gói** — ZIP lẫn
-  thư mục bộ cài — chứ không chỉ trong repo, đúng yêu cầu "đi kèm bản sao" của cả hai giấy phép.
-- `build.yml` chạy **một lượt publish thật** (framework-dependent, `-AllowLfsPointer` vì CI không tải LFS)
-  mỗi lần push và kiểm bản publish có đủ `PianoPath.exe`, `LICENSE.txt`, `Assets\`: lỗi của đường đóng gói
-  nay đỏ ngay lúc push thay vì đợi tới lần cắt bản phát hành.
+- **`publish.ps1`**: one command to a single-file **self-contained** (ReadyToRun) or **framework-dependent**
+  build for `win-x64` or `win-arm64`, with `-Zip`; the script refuses to publish while
+  `Assets\ConcertGrand.sf2` is still a Git LFS pointer, because that build would start without its piano.
+- A bilingual **Inno Setup installer** (`installer\Keyflow.iss` plus the 108-message partial translation in
+  `installer\Languages\Vietnamese.isl`): it picks the language from Windows, creates Start Menu/Desktop
+  shortcuts and an uninstall entry, and `tools/build_installer.ps1` turns any unexpected ISCC warning into an
+  error.
+- **`release.yml`**: pushing a `v*` tag produces a GitHub Release with **three ZIPs** (self-contained
+  `win-x64`, framework-dependent `win-x64`, self-contained `win-arm64`), the **`win-x64` `.exe` installer**
+  compiled from that same publish folder, and a **`SHA256SUMS.txt`** of every file so a download can be
+  checked by the person who downloaded it (the packages are not code-signed). The published build is smoke
+  tested with `--verify` before anything is attached.
+- **`LICENSE.txt` (MIT) and `Assets/ATTRIBUTION.txt` (the SoundFont's CC BY 3.0) are inside every package** —
+  the ZIPs and the installer's target folder — not only in the repository, which is what both licences ask of
+  a copy.
+- `build.yml` runs **one real publish** (framework-dependent, `-AllowLfsPointer` because CI does not fetch
+  LFS) on every push and checks that the output holds `PianoPath.exe`, `LICENSE.txt` and `Assets\`: a defect
+  in the packaging path now turns red at push time instead of waiting for a release to be cut.
 
-### Kiểm chứng
+### Verification
 
-- **Ba lớp kiểm chứng**:
-  - `tools/check_sources.py` — tĩnh, chạy trên mọi máy, không cần .NET SDK. Đợt này thêm **hai luật**:
-    `scan_release_version` ghim số phiên bản vào một nguồn duy nhất (`<Version>` của `PianoPath.csproj`)
-    và `scan_project_files` parse mọi file MSBuild (`.csproj`, `.pubxml`) đúng cách MSBuild sẽ parse, vì
-    một comment XML chứa hai dấu gạch nối là cả project không nạp được.
-  - `--verify` — **58 hàm kiểm chứng** trên Windows: toán shader, MIDI, SoundFont, AVI/MP4/PNG, cài đặt,
-    dock, ngôn ngữ, lịch sử, hồ sơ, trợ năng, high contrast, engine GPU trên WARP và cổng hiệu năng.
-  - **Ảnh README do chính ứng dụng render trong CI** (mỗi cảnh một ảnh cho mỗi ngôn ngữ, cộng gallery
-    preset), không phải ảnh dàn dựng.
-- **`tests/PianoPath.Tests`**: 133 test case xUnit trên `net10.0` thường (link 10 tệp nguồn, chạy trên
-  Linux trong ~1 phút) cho MIDI, MusicXML, chia tay, lưới phách, WAV, ngân sách khung hình và nửa thuần
-  của `Loc`.
-- **Cổng hiệu năng `--bench`**: đo thời gian từng khung ở 1920×1080 cho hai cảnh (cài đặt mặc định
-  p95 < 8 ms, preset có sẵn nặng nhất p95 < 16 ms) trên máy có card đồ hoạ thật; trên adapter phần mềm
-  (mọi runner CI) chỉ so tương đối với lượt trước và in `NOTE`, vì cùng một code mà WARP đo chênh nhau gần
-  hai lần giữa hai lượt chạy.
+- **Three verification layers**:
+  - `tools/check_sources.py` — static, runs on any machine, needs no .NET SDK. This round added **two
+    rules**: `scan_release_version`, which pins the version number to one source (`<Version>` in
+    `PianoPath.csproj`), and `scan_project_files`, which parses every MSBuild file (`.csproj`, `.pubxml`)
+    the way MSBuild itself would, because an XML comment containing a double hyphen stops the whole
+    project from loading.
+  - `--verify` — **58 verification functions** on Windows: shader maths, MIDI, SoundFont, AVI/MP4/PNG,
+    settings, dock, language, history, profile, accessibility, high contrast, the GPU engine on WARP and
+    the perf gate.
+  - **README pictures the application renders itself in CI** (one picture per subject per language, plus
+    the preset gallery), never staged screenshots.
+- **`tests/PianoPath.Tests`**: 133 xUnit test cases on plain `net10.0` (10 linked source files, about a minute
+  on Linux) for MIDI, MusicXML, the hand split, the beat grid, WAV, the frame budget and the plain half of
+  `Loc`.
+- **The `--bench` perf gate**: every frame time measured at 1920×1080 for two scenes (the default settings at
+  p95 < 8 ms, the heaviest built-in preset at p95 < 16 ms) on a machine with a real graphics card; on a
+  software adapter (every CI runner) it only compares against the previous run and prints `NOTE`, because two
+  runs of the same code on WARP have differed by nearly a factor of two.
 
-### Đã biết, để sau 1.0.0
+### Known, and left for after 1.0.0
 
-- **Chưa ký mã**: Windows SmartScreen vẫn hiện "Windows protected your PC" ở lần chạy đầu (README ghi cách
-  vượt qua). `SHA256SUMS.txt` là để người tải kiểm tệp, không thay được chữ ký.
-- **Chưa có MSIX, manifest winget và kiểm tra cập nhật trong ứng dụng** — cả ba cần tài khoản/chứng chỉ
-  hoặc một quyết định về mạng, trong khi sản phẩm cam kết offline và không telemetry
+- **No code signing**: Windows SmartScreen still shows "Windows protected your PC" on first launch (the README
+  says how past it). `SHA256SUMS.txt` lets a downloader check a file; it is not a signature.
+- **No MSIX, no winget manifest and no in-application update check** — all three need an
+  account/certificate or a decision about networking, while the product promises offline and no telemetry
   (`docs/ROADMAP.md` §4 #5).
-- **Một tệp MP4 thật vẫn chờ một máy Windows bình thường xác nhận**: runner CI treo trong
-  `IMFSample::SetSampleTime` nên mục đó luôn `SKIP` ở đó; app đã tự lùi về AVI khi gặp một máy như vậy.
-- **Ngân sách 8/16 ms chưa được xác nhận bằng số đo trên card đồ hoạ thật** — sandbox và runner đều chỉ có
-  WARP. Gói `win-arm64` cũng vậy: được publish trong CI nhưng chưa chạy thử trên máy ARM.
-- Chưa có bản *lite* không kèm SoundFont (~113 MiB là khoảng một phần ba tổng tải) — `docs/ROADMAP.md` §4 #4.
+- **A real MP4 file still waits for an ordinary Windows machine to confirm it**: CI runners hang inside
+  `IMFSample::SetSampleTime`, so that check reports `SKIP` there; the application already falls back to AVI
+  on a machine like that.
+- **The 8/16 ms budget has not been confirmed by a measurement on a real graphics card** — the sandbox and the
+  runners only have WARP. The same goes for the `win-arm64` package: CI publishes it, no ARM machine has run
+  it yet.
+- No *lite* build without the SoundFont yet (~113 MiB is about a third of the total download) —
+  `docs/ROADMAP.md` §4 #4.
