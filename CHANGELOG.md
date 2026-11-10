@@ -205,9 +205,9 @@ this entry describes the product as released rather than listing every commit (n
 
 - The Play dialog holds **RECENT** (the 12 latest songs with note count, track count, tempo, hand split, fall
   speed, playback tempo and preset — reopening restores all of them through the very sliders) and a
-  folder-based **LIBRARY** (a bounded BFS of 3 levels/500 files read by the app's own readers, cached by size
-  + modification time in `library-index.json`, per-song tags, search over title–file name–tags, and a folder
-  watcher so the list follows the disk).
+  folder-based **LIBRARY** (a bounded BFS of 3 levels/500 files read by the app's own readers, cached by
+  size + modification time in `library-index.json`, per-song tags, search over title–file name–tags, and a
+  folder watcher so the list follows the disk).
 - A **settings profile** `Keyflow.profile.json` gathering the stage settings + language + theme, imported and
   exported on the General page; drag-and-drop of `.json` (a profile), `.mid`/`.midi` (open a song) and images
   (set the background) onto the window.

@@ -53,9 +53,10 @@ Loc.Apply("vi");  Loc.Refresh();                           // đổi ngôn ngữ
 
 Ba điều đáng nhớ khi dùng:
 
-* **`Set`/`Format`/`Bind` đăng ký, chúng không in ngay.** Nhãn được giữ bằng `ConditionalWeakTable`
-  + danh sách `WeakReference`, nên một element bị gỡ đi không bao giờ được vẽ lại và cũng không giữ
-  đối tượng sống. Vì vậy code tạo control *luôn* gọi `Loc.Set`, kể cả khi ngôn ngữ hiện tại là tiếng Anh.
+* **`Set`/`Format`/`Bind` đăng ký, chúng không in ngay.** Nhãn được giữ bằng
+  `ConditionalWeakTable` + danh sách `WeakReference`, nên một element bị gỡ đi không bao giờ được vẽ lại
+  và cũng không giữ đối tượng sống. Vì vậy code tạo control *luôn* gọi `Loc.Set`, kể cả khi ngôn ngữ
+  hiện tại là tiếng Anh.
 * **Chỗ nào văn bản được *ghép* thì phải dùng renderer** (`Bind`/`Format`), không dùng `T` lên chuỗi
   đã ghép. `Loc.T(preset.Description)` hợp lệ vì `Description` là khoá tiếng Anh;
   `Loc.T(description + path)` thì không, và bộ kiểm tĩnh sẽ báo khoá lạ.
